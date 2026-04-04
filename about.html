@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EarlyTube — Our Story</title>
+<meta name="description" content="Why EarlyTube exists. One parent, one night, one big idea."/>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  :root {
+    --red:#E53935; --red-light:#FFEBEE;
+    --bg:#F7F8FA; --card:#FFFFFF; --border:#E8EAF0;
+    --text:#1A1D23; --text-2:#6B7280; --text-3:#9CA3AF;
+    --radius:16px;
+  }
+  @media(prefers-color-scheme:dark){
+    :root{
+      --bg:#0F0F11; --card:#1C1C1E; --border:#2C2C2E;
+      --text:#F2F2F7; --text-2:#9CA3AF; --text-3:#6B7280;
+      --red-light:#2C1A1A;
+    }
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;line-height:1.7;}
+
+  /* NAV */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;max-width:680px;margin:0 auto;}
+  .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);}
+  .nav-icon{width:36px;height:36px;background:var(--red);border-radius:9px;display:flex;align-items:center;justify-content:center;}
+  .nav-icon svg{width:16px;height:16px;fill:white;}
+  .nav-name{font-size:17px;font-weight:700;}
+  .nav-link{font-size:14px;color:var(--red);font-weight:600;text-decoration:none;background:var(--red-light);padding:8px 16px;border-radius:20px;}
+
+  /* HERO */
+  .hero{max-width:680px;margin:0 auto;padding:48px 24px 40px;}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:6px;background:var(--red-light);color:var(--red);font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:20px;text-transform:uppercase;letter-spacing:0.5px;}
+  .hero h1{font-size:clamp(32px,6vw,52px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:20px;}
+  .hero h1 span{color:var(--red);}
+  .hero-sub{font-size:18px;color:var(--text-2);line-height:1.7;max-width:560px;}
+
+  /* DIVIDER */
+  .divider{max-width:680px;margin:0 auto;padding:0 24px;}
+  .divider hr{border:none;border-top:1px solid var(--border);margin:40px 0;}
+
+  /* STORY */
+  .story{max-width:680px;margin:0 auto;padding:0 24px;}
+  .story p{font-size:17px;color:var(--text-2);margin-bottom:20px;line-height:1.8;}
+  .story p strong{color:var(--text);font-weight:600;}
+  .story .highlight{background:var(--red-light);border-left:3px solid var(--red);padding:16px 20px;border-radius:0 10px 10px 0;margin:28px 0;}
+  .story .highlight p{color:var(--text);font-size:18px;font-style:italic;margin:0;}
+
+  /* STATS ROW */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:680px;margin:40px auto;padding:0 24px;}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;}
+  .stat-number{font-size:28px;font-weight:800;color:var(--red);letter-spacing:-1px;}
+  .stat-label{font-size:12px;color:var(--text-3);margin-top:4px;line-height:1.4;}
+
+  /* WHY CARD */
+  .why-section{max-width:680px;margin:0 auto;padding:0 24px;}
+  .why-grid{display:flex;flex-direction:column;gap:12px;margin-top:20px;}
+  .why-item{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;}
+  .why-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+  .why-icon.red{background:var(--red-light);}
+  .why-title{font-size:15px;font-weight:600;margin-bottom:4px;}
+  .why-text{font-size:13px;color:var(--text-2);line-height:1.6;}
+
+  /* NIGHT BANNER */
+  .night-banner{max-width:680px;margin:40px auto;padding:0 24px;}
+  .night-card{background:var(--text);color:var(--bg);border-radius:var(--radius);padding:28px;position:relative;overflow:hidden;}
+  @media(prefers-color-scheme:dark){.night-card{background:#F2F2F7;color:#0F0F11;}}
+  .night-card h3{font-size:20px;font-weight:800;margin-bottom:10px;letter-spacing:-0.5px;}
+  .night-card p{font-size:14px;opacity:0.65;line-height:1.7;}
+  .night-badge{position:absolute;top:20px;right:20px;background:var(--red);color:white;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.5px;}
+
+  /* DONATION */
+  .donate-section{max-width:680px;margin:0 auto;padding:0 24px 60px;}
+  .donate-card{background:var(--card);border:2px dashed var(--border);border-radius:var(--radius);padding:28px;text-align:center;}
+  .donate-emoji{font-size:40px;margin-bottom:12px;}
+  .donate-card h3{font-size:20px;font-weight:700;margin-bottom:8px;}
+  .donate-card p{font-size:14px;color:var(--text-2);margin-bottom:20px;line-height:1.6;}
+  .donate-btn{display:inline-block;background:var(--red);color:white;font-size:15px;font-weight:600;padding:14px 28px;border-radius:12px;text-decoration:none;font-family:inherit;}
+  .donate-btn:active{opacity:0.85;}
+  .donate-note{font-size:12px;color:var(--text-3);margin-top:12px;}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-size:12px;color:var(--text-3);}
+  footer a{color:var(--red);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">
+    <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <span class="nav-name">EarlyTube</span>
+  </a>
+  <a class="nav-link" href="index.html">Open app →</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">✦ Our story</div>
+  <h1>Built in one night.<br/>For <span>every parent</span><br/>who isn't too late.</h1>
+  <p class="hero-sub">EarlyTube started with a simple, heartbreaking observation — and a question that wouldn't let go.</p>
+</div>
+
+<div class="divider"><hr/></div>
+
+<div class="story">
+  <p>My child is on the autism spectrum. Like many kids, they discovered YouTube — and with it, the rewind button. What followed was a pattern I couldn't unsee: the same one-second clip, over and over and over. Not watching a video. <strong>Stimming on it.</strong></p>
+
+  <p>The behaviour had a name. It had a cause. And by the time I understood what was happening, the habit was already deeply set. My child was too smart, too used to it. There was no going back.</p>
+
+  <div class="highlight">
+    <p>"But what about the child who was diagnosed yesterday? What if they were never introduced to the rewind button in the first place? <strong>What if they never know?</strong>"</p>
+  </div>
+
+  <p>That question sat with me for a while. Then one night, I decided to stop waiting for someone else to build it. I opened my laptop and didn't stop until EarlyTube existed.</p>
+
+  <p>It's not a cure. It's not therapy. It's a small, free tool — a version of YouTube that simply <strong>removes the controls</strong>. No rewind. No skip. No progress bar to scrub. Just the video, playing forward, as it was meant to be watched.</p>
+
+  <p>For parents of newly diagnosed children, this could matter enormously. The habit that took hold in my child might never form in yours — <strong>if you start here, before they know there's anything else.</strong></p>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-number">1</div>
+    <div class="stat-label">night to build</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">£0</div>
+    <div class="stat-label">forever free</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">0</div>
+    <div class="stat-label">ads or tracking</div>
+  </div>
+</div>
+
+<div class="why-section">
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-icon red">🔒</div>
+      <div>
+        <div class="why-title">No controls. Ever.</div>
+        <div class="why-text">No rewind, no skip, no progress bar. An invisible layer blocks all interaction with the player. The video just plays.</div>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-icon red">📌</div>
+      <div>
+        <div class="why-title">Parent PIN to exit</div>
+        <div class="why-text">Closing a video requires a 4-digit PIN. The child stays in a safe, controlled viewing experience until a parent decides otherwise.</div>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-icon red">📋</div>
+      <div>
+        <div class="why-title">Curated educational videos</div>
+        <div class="why-text">Age-appropriate suggestions from trusted channels. Parents can also paste any YouTube link directly — they stay the gatekeeper of what gets watched.</div>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-icon red">💛</div>
+      <div>
+        <div class="why-title">Built by a parent, for parents</div>
+        <div class="why-text">No company behind this. No agenda. Just a parent who saw a problem, built a solution overnight, and put it online for free.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="night-banner">
+  <div class="night-card">
+    <div class="night-badge">One night</div>
+    <h3>Yes, this was really built overnight.</h3>
+    <p>EarlyTube went from an idea to a live, working app in a single evening. No team, no funding, no office. Just a parent, a laptop, and the kind of motivation that only comes from loving someone who needs this.</p>
+  </div>
+</div>
+
+<div class="donate-section">
+  <div class="donate-card">
+    <div class="donate-emoji">🥤</div>
+    <h3>Buy me a juice?</h3>
+    <p>EarlyTube is completely free and always will be. But if it's helped your family — or you just like the idea — you're welcome to buy me a juice. (I don't drink coffee. Chipotle also accepted.)</p>
+    <a class="donate-btn" href="https://ko-fi.com/earlytube" target="_blank">Buy me a juice 🥤</a>
+    <div class="donate-note">No pressure. Seriously. Go use the app instead.</div>
+  </div>
+</div>
+
+<footer>
+  Made with love (and sleep deprivation) by a parent. &nbsp;·&nbsp;
+  <a href="index.html">Open EarlyTube</a> &nbsp;·&nbsp;
+  <a href="mailto:earlytubeapp@gmail.com">earlytubeapp@gmail.com</a>
+</footer>
+
+</body>
+</html>
