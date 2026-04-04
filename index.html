@@ -360,8 +360,12 @@ function prepareVideo(id){
 }
 
 function lockControls(){
+  // Get current time from iframe if possible, then reload with controls=0
+  var id = pendingId;
+  var iframe = document.getElementById('yt-iframe');
+  iframe.src='https://www.youtube.com/embed/'+id+'?autoplay=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1';
   document.getElementById('player-overlay').style.display='block';
-  document.getElementById('controls-hider').style.display='block';
+  document.getElementById('controls-hider').style.display='none';
   document.getElementById('btn-lock').style.display='none';
   document.getElementById('lock-hint').style.display='none';
 }
