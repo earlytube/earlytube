@@ -348,10 +348,14 @@ function prepareVideo(id){
   pendingId=id;
   document.getElementById('url-error').textContent='';
   document.getElementById('url-input').value='';
-  document.getElementById('yt-iframe').src='https://www.youtube.com/embed/'+id+'?autoplay=0&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1';
+  document.getElementById('yt-iframe').src='https://www.youtube.com/embed/'+id+'?autoplay=0&controls=1&disablekb=0&fs=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1';
   document.getElementById('player-overlay').style.display='none';
-  document.getElementById('tap-to-start').style.display='flex';
+  document.getElementById('tap-to-start').style.display='none';
   show('player-screen');
+  // After 3 seconds lock the controls
+  setTimeout(function(){
+    document.getElementById('player-overlay').style.display='block';
+  }, 3000);
 }
 
 function startVideo(){
