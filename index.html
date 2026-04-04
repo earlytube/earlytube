@@ -94,10 +94,9 @@
   #tap-to-start p{font-size:15px;color:rgba(255,255,255,0.75);font-weight:500;}
   .player-bar{background:#111;padding:16px 20px;width:100%;display:flex;flex-direction:column;gap:10px;}
   .now-playing{font-size:12px;color:#666;font-weight:500;text-transform:uppercase;letter-spacing:0.5px;}
-  .btn-lock{width:100%;padding:14px;border-radius:10px;background:var(--red);border:none;color:white;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .lock-countdown{font-size:13px;color:#888;text-align:center;}
   .btn-close{width:100%;padding:14px;border-radius:10px;background:#1C1C1E;border:1px solid #2C2C2E;color:white;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;}
   .btn-close svg{width:14px;height:14px;fill:#999;}
-  .lock-hint{font-size:11px;color:#555;text-align:center;}
   #report-modal{display:none;position:fixed;inset:0;background:rgba(10,10,15,0.85);z-index:200;align-items:flex-end;justify-content:center;}
   #pin-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,15,0.92);z-index:100;flex-direction:column;align-items:center;justify-content:center;gap:18px;}  .pin-icon{width:52px;height:52px;background:#1C1C2E;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;}
   .pin-icon svg{width:22px;height:22px;fill:#9CA3AF;}
@@ -204,8 +203,7 @@
   </div>
   <div class="player-bar">
     <div class="now-playing">Now playing</div>
-    <button class="btn-lock" id="btn-lock" onclick="lockControls()">🔒 Lock for child — tap when video starts</button>
-    <div class="lock-hint" id="lock-hint">Start the video above, then tap Lock to hand to your child</div>
+    <div class="lock-countdown" id="lock-countdown">Tap play above — controls lock automatically</div>
     <button class="btn-close" onclick="requestClose()">
       <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
       Close video — parent PIN required
@@ -348,34 +346,44 @@ function show(id){document.querySelectorAll('.screen').forEach(function(s){s.sty
 function extractId(url){var p=[/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,/^([a-zA-Z0-9_-]{11})$/];for(var i=0;i<p.length;i++){var m=url.match(p[i]);if(m)return m[1];}return null;}
 function handleWatch(){var id=extractId(document.getElementById('url-input').value.trim());if(!id){document.getElementById('url-error').textContent='Please paste a valid YouTube link.';return;}prepareVideo(id);}
 
+var lockTimer=null;
+
 function prepareVideo(id){
   pendingId=id;
   document.getElementById('url-error').textContent='';
   document.getElementById('url-input').value='';
+  if(lockTimer){clearTimeout(lockTimer);lockTimer=null;}
   document.getElementById('yt-iframe').src='https://www.youtube.com/embed/'+id+'?autoplay=0&controls=1&disablekb=0&fs=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1';
   document.getElementById('player-overlay').style.display='none';
-  document.getElementById('btn-lock').style.display='flex';
-  document.getElementById('lock-hint').style.display='block';
+  document.getElementById('controls-hider').style.display='none';
+  document.getElementById('lock-countdown').textContent='Tap play above — controls lock automatically';
   show('player-screen');
+  // Start countdown — auto lock after 5 seconds
+  var secs=5;
+  var interval=setInterval(function(){
+    secs--;
+    if(secs>0){
+      document.getElementById('lock-countdown').textContent='Controls locking in '+secs+'…';
+    } else {
+      clearInterval(interval);
+      lockControls();
+    }
+  },1000);
 }
 
 function lockControls(){
-  // Get current time from iframe if possible, then reload with controls=0
-  var id = pendingId;
-  var iframe = document.getElementById('yt-iframe');
-  iframe.src='https://www.youtube.com/embed/'+id+'?autoplay=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1';
+  if(lockTimer){clearTimeout(lockTimer);lockTimer=null;}
+  document.getElementById('yt-iframe').src='https://www.youtube.com/embed/'+pendingId+'?autoplay=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1';
   document.getElementById('player-overlay').style.display='block';
   document.getElementById('controls-hider').style.display='none';
-  document.getElementById('btn-lock').style.display='none';
-  document.getElementById('lock-hint').style.display='none';
+  document.getElementById('lock-countdown').textContent='🔒 Controls locked';
 }
 
 function closeVideo(){
+  if(lockTimer){clearTimeout(lockTimer);lockTimer=null;}
   document.getElementById('yt-iframe').src='';
   document.getElementById('player-overlay').style.display='none';
   document.getElementById('controls-hider').style.display='none';
-  document.getElementById('btn-lock').style.display='flex';
-  document.getElementById('lock-hint').style.display='block';
   show('home');
 }
 function showHome(){show('home');}
