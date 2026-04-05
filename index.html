@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -7,7 +6,6 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
-<!-- v1.4 -->
 <title>EarlyTube</title>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -16,182 +14,979 @@
 <link rel="icon" type="image/png" href="icon.png"/>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2DFE2R37G1"></script>
 <script>
-  window.dataLayer=window.dataLayer||[];
+  window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js',new Date());
-  gtag('config','G-2DFE2R37G1');
+  gtag('js', new Date());
+  gtag('config', 'G-2DFE2R37G1');
 </script>
-<!-- Firebase -->
+
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js?v=2"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js?v=2"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js?v=2"></script>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-  :root{
-    --red:#E53935;--red-dark:#B71C1C;--red-light:#FFEBEE;
-    --bg:#F7F8FA;--card:#FFFFFF;--border:#E8EAF0;
-    --text:#1A1D23;--text-2:#6B7280;--text-3:#9CA3AF;
-    --radius:14px;--shadow:0 1px 4px rgba(0,0,0,0.07),0 4px 16px rgba(0,0,0,0.05);
-    --badge-bg:#FFFFFF;--video-bg:#F7F8FA;--input-bg:#F7F8FA;
+
+  :root {
+    --red: #E53935;
+    --red-dark: #B71C1C;
+    --red-light: #FFEBEE;
+    --bg: #F7F8FA;
+    --card: #FFFFFF;
+    --border: #E8EAF0;
+    --text: #1A1D23;
+    --text-2: #6B7280;
+    --text-3: #9CA3AF;
+    --radius: 14px;
+    --shadow: 0 1px 4px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.05);
+    --badge-bg: #FFFFFF;
+    --video-bg: #F7F8FA;
+    --input-bg: #F7F8FA;
   }
-  @media(prefers-color-scheme:dark){
-    :root{
-      --red:#EF5350;--red-dark:#C62828;--red-light:#2C1A1A;
-      --bg:#0F0F11;--card:#1C1C1E;--border:#2C2C2E;
-      --text:#F2F2F7;--text-2:#9CA3AF;--text-3:#6B7280;
-      --shadow:0 1px 4px rgba(0,0,0,0.3),0 4px 16px rgba(0,0,0,0.2);
-      --badge-bg:#1C1C1E;--video-bg:#2C2C2E;--input-bg:#2C2C2E;
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --red: #EF5350;
+      --red-dark: #C62828;
+      --red-light: #2C1A1A;
+      --bg: #0F0F11;
+      --card: #1C1C1E;
+      --border: #2C2C2E;
+      --text: #F2F2F7;
+      --text-2: #9CA3AF;
+      --text-3: #6B7280;
+      --shadow: 0 1px 4px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
+      --badge-bg: #1C1C1E;
+      --video-bg: #2C2C2E;
+      --input-bg: #2C2C2E;
     }
-    .info-card{background:#2C1A1A!important;border-color:#5C2020!important;}
-    .info-card p{color:#FCA5A5!important;}
-    .modal-box{background:#1C1C1E!important;}
-    .modal-input{background:#2C2C2E!important;color:#F2F2F7!important;}
+    .info-card {
+      background: #2C1A1A !important;
+      border-color: #5C2020 !important;
+    }
+    .info-card p {
+      color: #FCA5A5 !important;
+    }
+    .modal-box {
+      background: #1C1C1E !important;
+    }
+    .modal-input {
+      background: #2C2C2E !important;
+      color: #F2F2F7 !important;
+    }
   }
-  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;min-height:100vh;}
-  .screen{display:none;flex-direction:column;align-items:center;min-height:100vh;}
-  #home{display:flex;}
 
-.header{width:100%;max-width:560px;padding:32px 24px 16px;}
-.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
-.brand{display:flex;align-items:center;gap:14px;cursor:pointer;user-select:none;}
-.brand-name{font-size:22px;font-weight:700;letter-spacing:-0.5px;}
-.brand-tag{font-size:12px;color:var(–text-2);margin-top:2px;}
-.brand-sub{font-size:11px;color:var(–red);margin-top:3px;font-weight:600;}
-.header-links{display:flex;align-items:center;gap:12px;}
-.story-link{color:var(–red);text-decoration:none;font-size:12px;font-weight:600;white-space:nowrap;}
-.contact-link{font-size:11px;color:var(–text-3);text-decoration:none;}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
 
-/* AUTH BAR */
-.auth-bar{width:100%;max-width:560px;padding:0 24px 16px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:10;}
-.auth-user{display:flex;align-items:center;gap:10px;}
-.auth-avatar{width:32px;height:32px;border-radius:50%;background:var(–red-light);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(–red);overflow:hidden;}
-.auth-avatar img{width:100%;height:100%;object-fit:cover;}
-.auth-name{font-size:13px;font-weight:500;color:var(–text);}
-.btn-signout{font-size:12px;color:var(–text-3);background:none;border:none;cursor:pointer;font-family:inherit;text-decoration:underline;}
-.btn-signin{display:flex;align-items:center;gap:8px;background:var(–card);border:1px solid var(–border);border-radius:10px;padding:8px 14px;cursor:pointer;font-size:13px;font-weight:600;color:var(–text);font-family:inherit;position:relative;z-index:10;-webkit-tap-highlight-color:rgba(0,0,0,0.1);}
-.btn-signin svg{width:16px;height:16px;flex-shrink:0;}
-.btn-signin-sub{font-size:11px;color:var(–text-3);margin-left:2px;}
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    min-height: 100vh;
+  }
 
-.badge-row{display:flex;gap:8px;flex-wrap:wrap;}
-.badge{display:flex;align-items:center;gap:5px;background:var(–badge-bg);border:1px solid var(–border);border-radius:20px;padding:5px 12px;font-size:11.5px;color:var(–text-2);font-weight:500;}
-.badge-dot{width:6px;height:6px;border-radius:50%;background:#22C55E;flex-shrink:0;}
+  .screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
 
-.card{background:var(–card);border:1px solid var(–border);border-radius:var(–radius);box-shadow:var(–shadow);padding:20px;width:calc(100% - 48px);max-width:560px;margin:0 24px 12px;}
-.input-label{font-size:12px;font-weight:600;color:var(–text-2);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;}
-.input-desc{font-size:12px;color:var(–text-3);margin-bottom:10px;line-height:1.5;}
-.input-wrap{display:flex;gap:10px;}
-.input-wrap input{flex:1;padding:13px 16px;border-radius:10px;border:1.5px solid var(–border);background:var(–input-bg);color:var(–text);font-size:15px;font-family:inherit;outline:none;}
-.input-wrap input:focus{border-color:var(–red);}
-.input-wrap input::placeholder{color:var(–text-3);}
-.btn-watch{padding:13px 22px;border-radius:10px;background:#E53935;color:white;border:none;font-weight:600;font-size:15px;font-family:inherit;cursor:pointer;white-space:nowrap;}
-.error-msg{font-size:12.5px;color:var(–red);margin-top:8px;min-height:16px;}
+  #home {
+    display: flex;
+  }
 
-.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
-.section-left{display:flex;align-items:center;gap:8px;}
-.section-title{font-size:12px;font-weight:600;color:var(–text-2);text-transform:uppercase;letter-spacing:0.6px;}
-.live-dot{width:6px;height:6px;border-radius:50%;background:#22C55E;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
-.age-select{padding:6px 10px;border-radius:8px;border:1px solid var(–border);background:var(–input-bg);color:var(–text);font-size:13px;font-family:inherit;outline:none;cursor:pointer;}
+  .header {
+    width: 100%;
+    max-width: 560px;
+    padding: 32px 24px 16px;
+  }
 
-.video-list{display:flex;flex-direction:column;gap:10px;}
-.video-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;background:var(–video-bg);border:1px solid var(–border);border-radius:10px;}
-.video-thumb{width:42px;height:42px;border-radius:8px;background:#E53935;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;}
-.video-thumb svg{width:16px;height:16px;fill:white;}
-.video-info{flex:1;min-width:0;cursor:pointer;}
-.video-title{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.video-sub{font-size:12px;color:var(–text-3);margin-top:2px;}
-.video-tag{font-size:10px;font-weight:600;background:var(–red-light);color:var(–red);padding:2px 7px;border-radius:5px;margin-top:6px;display:inline-block;}
-.report-btn{display:flex;align-items:center;gap:5px;margin-top:8px;font-size:12px;color:var(–red);background:var(–red-light);border:1px solid var(–red);border-radius:8px;padding:6px 12px;cursor:pointer;font-family:inherit;font-weight:500;}
-.loading-state,.empty-state{text-align:center;padding:24px;color:var(–text-3);font-size:13px;}
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
 
-.info-card{background:var(–red-light);border:1px solid #FFCDD2;border-radius:var(–radius);padding:16px 18px;width:calc(100% - 48px);max-width:560px;margin:0 24px 16px;}
-.info-card p{font-size:13px;color:#B71C1C;line-height:1.65;}
-.info-card strong{font-weight:600;}
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    user-select: none;
+  }
 
-/* PERSONAL VIDEOS CARD */
-.personal-card{background:var(–card);border:1.5px solid var(–red);border-radius:var(–radius);box-shadow:var(–shadow);padding:20px;width:calc(100% - 48px);max-width:560px;margin:0 24px 12px;}
-.personal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
-.personal-title{font-size:12px;font-weight:600;color:var(–red);text-transform:uppercase;letter-spacing:0.6px;}
-.btn-add-video{display:flex;align-items:center;gap:5px;font-size:12px;color:var(–red);background:var(–red-light);border:1px solid var(–red);border-radius:8px;padding:6px 12px;cursor:pointer;font-family:inherit;font-weight:600;}
-.sheet-link{font-size:11px;color:var(–text-3);text-decoration:none;display:block;margin-top:8px;}
-.sheet-link:hover{color:var(–red);}
+  .brand-name {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
 
-/* ADD VIDEO MODAL */
-#add-video-modal{display:none;position:fixed;inset:0;background:rgba(10,10,15,0.85);z-index:200;align-items:flex-end;justify-content:center;}
-.modal-box{background:var(–card);border:1px solid var(–border);border-radius:20px 20px 0 0;padding:28px 24px 40px;width:100%;max-width:560px;}
-.modal-title{font-size:17px;font-weight:700;margin-bottom:4px;}
-.modal-sub{font-size:13px;color:var(–text-2);margin-bottom:20px;line-height:1.5;}
-.modal-label{font-size:12px;font-weight:600;color:var(–text-2);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;display:block;}
-.modal-input{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(–border);background:var(–input-bg);color:var(–text);font-size:15px;font-family:inherit;outline:none;margin-bottom:14px;}
-.modal-input:focus{border-color:#E53935;}
-.modal-input::placeholder{color:var(–text-3);}
-.modal-btns{display:flex;gap:10px;}
-.btn-submit{flex:1;padding:14px;border-radius:10px;background:#E53935;color:white;border:none;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;}
-.btn-cancel{padding:14px 20px;border-radius:10px;background:var(–video-bg);color:var(–text-2);border:1px solid var(–border);font-size:15px;font-family:inherit;cursor:pointer;}
+  .brand-tag {
+    font-size: 12px;
+    color: var(--text-2);
+    margin-top: 2px;
+  }
 
-/* PLAYER */
-#player-screen{background:#000;width:100%;}
-.player-top{background:#111;padding:14px 20px;width:100%;}
-.player-instruction{font-size:13px;color:#aaa;margin-bottom:12px;line-height:1.5;}
-.btn-lock{width:100%;padding:14px;border-radius:10px;background:#E53935;border:none;color:white;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;}
-.player-wrap{position:relative;width:100%;background:#000;}
-#yt-iframe{display:block;width:100%;aspect-ratio:16/9;border:none;}
-.player-overlay{display:none;position:absolute;top:0;left:0;width:100%;height:100%;z-index:10;}
-.tap-to-play{position:absolute;top:0;left:0;width:100%;height:100%;z-index:20;background:rgba(0,0,0,0.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;cursor:pointer;}
-.play-circle{width:76px;height:76px;background:#E53935;border-radius:50%;display:flex;align-items:center;justify-content:center;}
-.play-circle svg{width:28px;height:28px;fill:white;margin-left:4px;}
-.tap-to-play p{font-size:15px;color:rgba(255,255,255,0.75);font-weight:500;}
-.lock-toast{position:absolute;top:16px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.85);color:white;font-size:15px;font-weight:700;padding:10px 20px;border-radius:20px;z-index:15;white-space:nowrap;transition:opacity 0.3s;border:1px solid rgba(255,255,255,0.15);}
-.lock-toast.hidden{opacity:0;pointer-events:none;}
-.player-bottom{background:#111;padding:14px 20px;width:100%;display:none;}
-.next-title{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;margin-bottom:10px;}
-.next-videos{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
-.next-video-btn{background:#1C1C1E;border:1px solid #2C2C2E;color:white;border-radius:10px;padding:12px 14px;text-align:left;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:10px;width:100%;}
-.next-video-btn:active{background:#2C2C2E;}
-.next-play-icon{width:28px;height:28px;background:#E53935;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.next-play-icon svg{width:12px;height:12px;fill:white;}
-.next-video-title{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.next-video-sub{font-size:11px;color:#666;margin-top:2px;}
-.btn-close{width:100%;padding:14px;border-radius:10px;background:#2C2C2E;border:1px solid #3C3C3E;color:#aaa;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;}
-.btn-close svg{width:14px;height:14px;fill:#666;}
+  .brand-sub {
+    font-size: 11px;
+    color: var(--red);
+    margin-top: 3px;
+    font-weight: 600;
+  }
 
-/* PIN */
-#pin-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,15,0.92);z-index:100;flex-direction:column;align-items:center;justify-content:center;gap:18px;}
-.pin-icon{width:52px;height:52px;background:#1C1C2E;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;}
-.pin-icon svg{width:22px;height:22px;fill:#9CA3AF;}
-#pin-overlay h2{font-size:18px;font-weight:600;color:white;}
-#pin-overlay p{font-size:13px;color:#9CA3AF;margin-top:-8px;}
-.pin-dots{display:flex;gap:12px;margin:4px 0;}
-.dot{width:14px;height:14px;border-radius:50%;background:#2C2C3E;transition:background 0.12s,transform 0.12s;}
-.dot.filled{background:#E53935;transform:scale(1.1);}
-.pin-error{font-size:12.5px;color:#F87171;height:16px;}
-.pin-grid{display:grid;grid-template-columns:repeat(3,72px);gap:10px;}
-.pin-btn{height:72px;border-radius:12px;background:#1C1C2E;border:1px solid #2C2C3E;color:white;font-size:22px;font-weight:500;font-family:inherit;cursor:pointer;}
-.pin-btn:active{background:#2C2C3E;}
-.pin-hint{font-size:11px;color:#4B5563;margin-top:4px;}
+  .header-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 
-/* REPORT MODAL */
-#report-modal{display:none;position:fixed;inset:0;background:rgba(10,10,15,0.85);z-index:200;align-items:flex-end;justify-content:center;pointer-events:none;}
-#report-modal .modal-box{pointer-events:all;}
-.privacy-note{font-size:11.5px;color:var(–text-3);margin-bottom:18px;line-height:1.5;}
+  .story-link {
+    color: var(--red);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
 
-/* SETTINGS */
-#settings-screen{background:var(–bg);}
-.settings-header{width:100%;max-width:560px;padding:52px 24px 20px;}
-.settings-header h2{font-size:22px;font-weight:700;letter-spacing:-0.5px;}
-.settings-header p{font-size:13px;color:var(–text-2);margin-top:4px;}
-.setting-card{background:var(–card);border:1px solid var(–border);border-radius:var(–radius);padding:18px 20px;width:calc(100% - 48px);max-width:560px;margin:0 24px 12px;}
-.setting-card label{font-size:12px;font-weight:600;color:var(–text-2);text-transform:uppercase;letter-spacing:0.6px;display:block;margin-bottom:10px;}
-.setting-card input{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(–border);background:var(–input-bg);color:var(–text);font-size:15px;font-family:inherit;outline:none;}
-.btn-save{width:calc(100% - 48px);max-width:560px;margin:4px 24px;padding:14px;border-radius:10px;background:#E53935;color:white;border:none;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;}
-.btn-back{width:calc(100% - 48px);max-width:560px;margin:8px 24px 32px;padding:14px;border-radius:10px;background:var(–card);color:var(–text);border:1px solid var(–border);font-size:15px;font-family:inherit;cursor:pointer;}
+  .contact-link {
+    font-size: 11px;
+    color: var(--text-3);
+    text-decoration: none;
+  }
+
+  .auth-bar {
+    width: 100%;
+    max-width: 560px;
+    padding: 0 24px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+  }
+
+  .auth-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .auth-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--red-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--red);
+    overflow: hidden;
+  }
+
+  .auth-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .auth-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .btn-signout {
+    font-size: 12px;
+    color: var(--text-3);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: underline;
+  }
+
+  .btn-signin {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    font-family: inherit;
+    position: relative;
+    z-index: 10;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+  }
+
+  .btn-signin svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .badge-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--badge-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 11.5px;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22C55E;
+    flex-shrink: 0;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    width: calc(100% - 48px);
+    max-width: 560px;
+    margin: 0 24px 12px;
+  }
+
+  .input-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 6px;
+  }
+
+  .input-desc {
+    font-size: 12px;
+    color: var(--text-3);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .input-wrap {
+    display: flex;
+    gap: 10px;
+  }
+
+  .input-wrap input {
+    flex: 1;
+    padding: 13px 16px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: var(--input-bg);
+    color: var(--text);
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+  }
+
+  .input-wrap input:focus {
+    border-color: var(--red);
+  }
+
+  .btn-watch {
+    padding: 13px 22px;
+    border-radius: 10px;
+    background: #E53935;
+    color: white;
+    border: none;
+    font-weight: 600;
+    font-size: 15px;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .error-msg {
+    font-size: 12.5px;
+    color: var(--red);
+    margin-top: 8px;
+    min-height: 16px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .section-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  .live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22C55E;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .age-select {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--input-bg);
+    color: var(--text);
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .video-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .video-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--video-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  .video-thumb {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    background: #E53935;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .video-thumb svg {
+    width: 16px;
+    height: 16px;
+    fill: white;
+  }
+
+  .video-info {
+    flex: 1;
+    min-width: 0;
+    cursor: pointer;
+  }
+
+  .video-title {
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .video-sub {
+    font-size: 12px;
+    color: var(--text-3);
+    margin-top: 2px;
+  }
+
+  .video-tag {
+    font-size: 10px;
+    font-weight: 600;
+    background: var(--red-light);
+    color: var(--red);
+    padding: 2px 7px;
+    border-radius: 5px;
+    margin-top: 6px;
+    display: inline-block;
+  }
+
+  .report-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--red);
+    background: var(--red-light);
+    border: 1px solid var(--red);
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+  }
+
+  .loading-state, .empty-state {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-3);
+    font-size: 13px;
+  }
+
+  .info-card {
+    background: var(--red-light);
+    border: 1px solid #FFCDD2;
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    width: calc(100% - 48px);
+    max-width: 560px;
+    margin: 0 24px 16px;
+  }
+
+  .info-card p {
+    font-size: 13px;
+    color: #B71C1C;
+    line-height: 1.65;
+  }
+
+  .personal-card {
+    background: var(--card);
+    border: 1.5px solid var(--red);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    width: calc(100% - 48px);
+    max-width: 560px;
+    margin: 0 24px 12px;
+  }
+
+  .personal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .personal-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  .btn-add-video {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--red);
+    background: var(--red-light);
+    border: 1px solid var(--red);
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+  }
+
+  .sheet-link {
+    font-size: 11px;
+    color: var(--text-3);
+    text-decoration: none;
+    display: block;
+    margin-top: 8px;
+  }
+
+  #add-video-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,15,0.85);
+    z-index: 200;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .modal-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px 20px 0 0;
+    padding: 28px 24px 40px;
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .modal-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .modal-sub {
+    font-size: 13px;
+    color: var(--text-2);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .modal-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .modal-input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: var(--input-bg);
+    color: var(--text);
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    margin-bottom: 14px;
+  }
+
+  .modal-btns {
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn-submit {
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
+    background: #E53935;
+    color: white;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  .btn-cancel {
+    padding: 14px 20px;
+    border-radius: 10px;
+    background: var(--video-bg);
+    color: var(--text-2);
+    border: 1px solid var(--border);
+    font-size: 15px;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  #player-screen {
+    background: #000;
+    width: 100%;
+  }
+
+  .player-top {
+    background: #111;
+    padding: 14px 20px;
+    width: 100%;
+  }
+
+  .player-instruction {
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .btn-lock {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    background: #E53935;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .player-wrap {
+    position: relative;
+    width: 100%;
+    background: #000;
+  }
+
+  #yt-iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: none;
+  }
+
+  .player-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
+
+  .tap-to-play {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    cursor: pointer;
+  }
+
+  .play-circle {
+    width: 76px;
+    height: 76px;
+    background: #E53935;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .play-circle svg {
+    width: 28px;
+    height: 28px;
+    fill: white;
+    margin-left: 4px;
+  }
+
+  .tap-to-play p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 500;
+  }
+
+  .lock-toast {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.85);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 20px;
+    z-index: 15;
+    white-space: nowrap;
+    transition: opacity 0.3s;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .lock-toast.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .player-bottom {
+    background: #111;
+    padding: 14px 20px;
+    width: 100%;
+    display: none;
+  }
+
+  .next-title {
+    font-size: 11px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .next-videos {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .next-video-btn {
+    background: #1C1C1E;
+    border: 1px solid #2C2C2E;
+    color: white;
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .next-play-icon {
+    width: 28px;
+    height: 28px;
+    background: #E53935;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .next-play-icon svg {
+    width: 12px;
+    height: 12px;
+    fill: white;
+  }
+
+  .btn-close {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    background: #2C2C2E;
+    border: 1px solid #3C3C3E;
+    color: #aaa;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  #pin-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,15,0.92);
+    z-index: 100;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+  }
+
+  .pin-icon {
+    width: 52px;
+    height: 52px;
+    background: #1C1C2E;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+
+  .pin-icon svg {
+    width: 22px;
+    height: 22px;
+    fill: #9CA3AF;
+  }
+
+  #pin-overlay h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+  }
+
+  #pin-overlay p {
+    font-size: 13px;
+    color: #9CA3AF;
+    margin-top: -8px;
+  }
+
+  .pin-dots {
+    display: flex;
+    gap: 12px;
+    margin: 4px 0;
+  }
+
+  .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #2C2C3E;
+    transition: background 0.12s, transform 0.12s;
+  }
+
+  .dot.filled {
+    background: #E53935;
+    transform: scale(1.1);
+  }
+
+  .pin-error {
+    font-size: 12.5px;
+    color: #F87171;
+    height: 16px;
+  }
+
+  .pin-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 72px);
+    gap: 10px;
+  }
+
+  .pin-btn {
+    height: 72px;
+    border-radius: 12px;
+    background: #1C1C2E;
+    border: 1px solid #2C2C3E;
+    color: white;
+    font-size: 22px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  #report-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,15,0.85);
+    z-index: 200;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .privacy-note {
+    font-size: 11.5px;
+    color: var(--text-3);
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+
+  #settings-screen {
+    background: var(--bg);
+  }
+
+  .settings-header {
+    width: 100%;
+    max-width: 560px;
+    padding: 52px 24px 20px;
+  }
+
+  .settings-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .setting-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    width: calc(100% - 48px);
+    max-width: 560px;
+    margin: 0 24px 12px;
+  }
+
+  .setting-card label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .setting-card input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: var(--input-bg);
+    color: var(--text);
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+  }
+
+  .btn-save {
+    width: calc(100% - 48px);
+    max-width: 560px;
+    margin: 4px 24px;
+    padding: 14px;
+    border-radius: 10px;
+    background: #E53935;
+    color: white;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  .btn-back {
+    width: calc(100% - 48px);
+    max-width: 560px;
+    margin: 8px 24px 32px;
+    padding: 14px;
+    border-radius: 10px;
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    font-size: 15px;
+    font-family: inherit;
+    cursor: pointer;
+  }
 </style>
-
 </head>
 <body>
-
-<!-- HOME -->
 
 <div id="home" class="screen">
   <div class="header">
@@ -219,8 +1014,6 @@
     </div>
   </div>
 
-  <!-- AUTH BAR -->
-
   <div class="auth-bar">
     <div id="auth-signed-out" style="display:flex;align-items:center;gap:10px;width:100%;">
       <button class="btn-signin" onclick="signIn()">
@@ -238,8 +1031,6 @@
     </div>
   </div>
 
-  <!-- PERSONAL VIDEOS (shown when logged in) -->
-
   <div class="personal-card" id="personal-card" style="display:none;">
     <div class="personal-header">
       <div class="personal-title">My videos</div>
@@ -253,7 +1044,7 @@
 
   <div class="card">
     <div class="input-label">Paste a YouTube link</div>
-    <div class="input-desc">Find a video on YouTube, copy the link and paste it here. Your child watches it without any controls — no rewind, no skip, no loop.</div>
+    <div class="input-desc">Find a video on YouTube, copy the link and paste it here.</div>
     <div class="input-wrap">
       <input id="url-input" type="url" inputmode="url" placeholder="youtube.com/watch?v=..."/>
       <button class="btn-watch" onclick="handleWatch()">Watch</button>
@@ -282,15 +1073,13 @@
   </div>
 
   <div class="info-card">
-    <p><strong>For parents:</strong> Select your child's age above to see suitable videos. Videos play with no controls visible — your child cannot rewind, skip, or scrub. Closing always requires the parent PIN. <strong>Default PIN is 1234.</strong> Long press logo to open Settings and change PIN.</p>
+    <p><strong>For parents:</strong> Select your child's age above to see suitable videos. Videos play with no controls visible. <strong>Default PIN is 1234.</strong> Long press logo to open Settings and change PIN.</p>
   </div>
 </div>
 
-<!-- PLAYER -->
-
 <div id="player-screen" class="screen">
   <div class="player-top" id="player-top">
-    <div class="player-instruction">Tap play on the video below, then tap Lock — controls disappear for your child.</div>
+    <div class="player-instruction">Tap play on the video below, then tap Lock — controls disappear.</div>
     <button class="btn-lock" onclick="lockControls()">🔒 Lock the controls</button>
   </div>
   <div class="player-wrap">
@@ -312,12 +1101,9 @@
   </div>
 </div>
 
-<!-- PIN -->
-
 <div id="pin-overlay">
   <div class="pin-icon"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></div>
   <h2 id="pin-title">Parent PIN required</h2>
-  <p id="pin-subtitle">Enter your 4-digit PIN to continue</p>
   <div class="pin-dots">
     <div class="dot" id="d0"></div><div class="dot" id="d1"></div>
     <div class="dot" id="d2"></div><div class="dot" id="d3"></div>
@@ -337,21 +1123,14 @@
     <button class="pin-btn" onclick="pinPress('0')">0</button>
     <button class="pin-btn" onclick="pinCancel()" style="font-size:12px;color:#9CA3AF">Cancel</button>
   </div>
-  <div class="pin-hint">Default PIN is 1234 · Change in Settings</div>
 </div>
 
-<!-- ADD VIDEO MODAL -->
-
-<div id="add-video-modal" style="display:none;position:fixed;inset:0;background:rgba(10,10,15,0.85);z-index:200;align-items:flex-end;justify-content:center;">
+<div id="add-video-modal">
   <div class="modal-box">
     <div class="modal-title">Add a video</div>
-    <div class="modal-sub">Paste a YouTube link and give it a name. It will appear in your personal video list.</div>
-    <label class="modal-label">YouTube link</label>
-    <input class="modal-input" id="add-url" type="url" inputmode="url" placeholder="youtube.com/watch?v=..."/>
-    <label class="modal-label">Video title</label>
-    <input class="modal-input" id="add-title" type="text" placeholder="e.g. Baby Shark"/>
-    <label class="modal-label">Category (optional)</label>
-    <input class="modal-input" id="add-category" type="text" placeholder="e.g. Animals, Science, Stories"/>
+    <input class="modal-input" id="add-url" type="url" placeholder="YouTube link"/>
+    <input class="modal-input" id="add-title" type="text" placeholder="Video title"/>
+    <input class="modal-input" id="add-category" type="text" placeholder="Category (optional)"/>
     <div class="modal-btns">
       <button class="btn-cancel" onclick="closeAddVideoModal()">Cancel</button>
       <button class="btn-submit" onclick="savePersonalVideo()">Save video</button>
@@ -359,423 +1138,423 @@
   </div>
 </div>
 
-<!-- REPORT MODAL -->
-
-<div id="report-modal" style="display:none;position:fixed;inset:0;background:rgba(10,10,15,0.85);z-index:200;align-items:flex-end;justify-content:center;pointer-events:none;">
-  <div class="modal-box" style="pointer-events:all;">
+<div id="report-modal">
+  <div class="modal-box">
     <div class="modal-title">Suggest a replacement</div>
-    <div class="modal-sub" id="report-sub">Found a broken video? Suggest a better one.</div>
-    <label class="modal-label">Your email</label>
-    <input class="modal-input" id="report-email" type="email" inputmode="email" placeholder="your@email.com"/>
-    <label class="modal-label">Replacement YouTube link</label>
-    <input class="modal-input" id="report-link" type="url" inputmode="url" placeholder="youtube.com/watch?v=..."/>
-    <label class="modal-label">Any notes? (optional)</label>
-    <input class="modal-input" id="report-note" type="text" placeholder="e.g. Great science video for toddlers"/>
-    <div class="privacy-note">Your email will only be used to notify you if your suggestion is approved. We will never share it.</div>
+    <p id="report-sub" style="font-size:13px; color:var(--text-2); margin-bottom:15px;"></p>
+    <input class="modal-input" id="report-email" type="email" placeholder="Your email"/>
+    <input class="modal-input" id="report-link" type="url" placeholder="Replacement link"/>
+    <input class="modal-input" id="report-note" type="text" placeholder="Any notes?"/>
     <div class="modal-btns">
       <button class="btn-cancel" onclick="closeReportModal()">Cancel</button>
-      <button class="btn-submit" onclick="submitReport()">Submit suggestion</button>
+      <button class="btn-submit" onclick="submitReport()">Submit</button>
     </div>
   </div>
 </div>
 
-<!-- SETTINGS -->
-
 <div id="settings-screen" class="screen">
-  <div class="settings-header">
-    <h2>Settings</h2>
-    <p>Manage your parent PIN and preferences</p>
-  </div>
+  <div class="settings-header"><h2>Settings</h2></div>
   <div class="setting-card">
     <label>Change Parent PIN</label>
-    <input id="new-pin" type="password" inputmode="numeric" maxlength="4" placeholder="Enter new 4-digit PIN"/>
+    <input id="new-pin" type="password" inputmode="numeric" maxlength="4" placeholder="Enter new 4 digits"/>
   </div>
   <button class="btn-save" onclick="saveSettings()">Save changes</button>
-  <button class="btn-back" onclick="showHome()">← Back to EarlyTube</button>
+  <button class="btn-back" onclick="showHome()">← Back</button>
 </div>
 
 <script>
-// Firebase config
-var firebaseConfig={
-  apiKey:'AIzaSyAwMKzuEiBXJdLpFJRCBcStypx7rEvZkJk',
-  authDomain:'earlytube.firebaseapp.com',
-  projectId:'earlytube',
-  storageBucket:'earlytube.firebasestorage.app',
-  messagingSenderId:'888437662959',
-  appId:'1:888437662959:web:538344569d8a4f092d671a',
-  measurementId:'G-Q8ZBY2M8MC'
+var firebaseConfig = {
+  apiKey: 'AIzaSyAwMKzuEiBXJdLpFJRCBcStypx7rEvZkJk',
+  authDomain: 'earlytube.firebaseapp.com',
+  projectId: 'earlytube',
+  storageBucket: 'earlytube.firebasestorage.app',
+  messagingSenderId: '888437662959',
+  appId: '1:888437662959:web:538344569d8a4f092d671a'
 };
 firebase.initializeApp(firebaseConfig);
-var auth=firebase.auth();
-var db=firebase.firestore();
-var currentUser=null;
-var userSheetUrl=null;
 
-// Google Sign In
-var provider=new firebase.auth.GoogleAuthProvider();
+var auth = firebase.auth();
+var db = firebase.firestore();
+var currentUser = null;
+var userSheetUrl = null;
+
+var provider = new firebase.auth.GoogleAuthProvider();
 provider.addScope('https://www.googleapis.com/auth/drive.file');
 provider.addScope('https://www.googleapis.com/auth/spreadsheets');
 
-function signIn(){
+function signIn() {
   auth.signInWithRedirect(provider);
 }
 
-// Handle redirect result on page load
-auth.getRedirectResult().then(function(result){
-  if(result&&result.user&&result.credential){
-    var token=result.credential.accessToken;
-    localStorage.setItem('et_gtoken',token);
-    setupUserProfile(result.user,token);
-  }
-}).catch(function(e){
-  console.error('Redirect error',e);
-});
-
-function signOut(){
-  auth.signOut().then(function(){
-    currentUser=null;
-    userSheetUrl=null;
+function signOut() {
+  auth.signOut().then(function() {
     localStorage.removeItem('et_gtoken');
-    document.getElementById('auth-signed-in').style.display='none';
-    document.getElementById('auth-signed-out').style.display='flex';
-    document.getElementById('personal-card').style.display='none';
+    location.reload();
   });
 }
 
-auth.onAuthStateChanged(function(user){
-  if(user){
-    currentUser=user;
-    document.getElementById('auth-signed-out').style.display='none';
-    document.getElementById('auth-signed-in').style.display='flex';
-    var av=document.getElementById('auth-avatar');
-    if(user.photoURL){av.innerHTML='<img src="'+user.photoURL+'" alt=""/>';}
-    else{av.textContent=user.displayName?user.displayName[0].toUpperCase():'U';}
-    document.getElementById('auth-name').textContent=user.displayName||user.email;
-    loadUserProfile(user);
+auth.getRedirectResult().then(function(result) {
+  if (result && result.credential) {
+    localStorage.setItem('et_gtoken', result.credential.accessToken);
+  }
+}).catch(function(e) { 
+  console.error("Auth error", e); 
+});
+
+auth.onAuthStateChanged(function(user) {
+  if (user) {
+    currentUser = user;
+    document.getElementById('auth-signed-out').style.display = 'none';
+    document.getElementById('auth-signed-in').style.display = 'flex';
+    var av = document.getElementById('auth-avatar');
+    if (user.photoURL) {
+      av.innerHTML = '<img src="' + user.photoURL + '"/>';
+    } else {
+      av.textContent = user.displayName ? user.displayName[0].toUpperCase() : 'U';
+    }
+    document.getElementById('auth-name').textContent = user.displayName || user.email;
+    
+    db.collection('users').doc(user.uid).get().then(function(doc) {
+      if (doc.exists && doc.data().sheetUrl) {
+        userSheetUrl = doc.data().sheetUrl;
+        document.getElementById('sheet-link').href = userSheetUrl;
+        document.getElementById('personal-card').style.display = 'block';
+        loadPersonalVideos(doc.data().csvUrl);
+      } else {
+        var token = localStorage.getItem('et_gtoken');
+        if (token) {
+          setupUserProfile(user, token);
+        }
+      }
+    });
   }
 });
 
-function loadUserProfile(user){
-  db.collection('users').doc(user.uid).get().then(function(doc){
-    if(doc.exists&&doc.data().sheetUrl){
-      userSheetUrl=doc.data().sheetUrl;
-      document.getElementById('sheet-link').href=userSheetUrl;
-      document.getElementById('personal-card').style.display='block';
-      loadPersonalVideos(doc.data().csvUrl);
-    } else {
-      var token=localStorage.getItem('et_gtoken');
-      if(token){setupUserProfile(user,token);}
-      else{
-        // Re-authenticate to get token
-        auth.signInWithPopup(provider).then(function(r){
-          localStorage.setItem('et_gtoken',r.credential.accessToken);
-          setupUserProfile(user,r.credential.accessToken);
-        });
-      }
-    }
-  });
+async function setupUserProfile(user, token) {
+  try {
+    const fId = await createDriveFolder(token, user.displayName || 'My');
+    const sD = await createSheet(token, fId, user.displayName || 'My');
+    var sU = 'https://docs.google.com/spreadsheets/d/' + sD.id + '/edit';
+    var cU = 'https://docs.google.com/spreadsheets/d/' + sD.id + '/export?format=csv';
+    await db.collection('users').doc(user.uid).set({
+      name: user.displayName,
+      email: user.email,
+      sheetId: sD.id,
+      sheetUrl: sU,
+      csvUrl: cU,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+    location.reload();
+  } catch(e) { 
+    console.error(e); 
+  }
 }
 
-function setupUserProfile(user,token){
-  // Create EarlyTube folder and sheet in user's Drive
-  createDriveFolder(token,user.displayName||'My').then(function(folderId){
-    return createSheet(token,folderId,user.displayName||'My');
-  }).then(function(sheetData){
-    var sheetUrl='https://docs.google.com/spreadsheets/d/'+sheetData.id+'/edit';
-    var csvUrl='https://docs.google.com/spreadsheets/d/'+sheetData.id+'/export?format=csv';
-    userSheetUrl=sheetUrl;
-    db.collection('users').doc(user.uid).set({
-      name:user.displayName,
-      email:user.email,
-      sheetId:sheetData.id,
-      sheetUrl:sheetUrl,
-      csvUrl:csvUrl,
-      createdAt:firebase.firestore.FieldValue.serverTimestamp()
-    },{merge:true});
-    document.getElementById('sheet-link').href=sheetUrl;
-    document.getElementById('personal-card').style.display='block';
-    document.getElementById('personal-video-list').innerHTML='<div class="empty-state">No videos yet. Tap + Add video or open your Sheet to add some.</div>';
-  }).catch(function(e){
-    console.error('Setup error',e);
-    document.getElementById('personal-card').style.display='block';
-    document.getElementById('personal-video-list').innerHTML='<div class="empty-state">Tap + Add video to get started.</div>';
-  });
+function createDriveFolder(t, n) {
+  return fetch('https://www.googleapis.com/drive/v3/files', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + t, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: 'EarlyTube', mimeType: 'application/vnd.google-apps.folder' })
+  }).then(r => r.json()).then(d => d.id);
 }
 
-function createDriveFolder(token,name){
-  return fetch('https://www.googleapis.com/drive/v3/files',{
-    method:'POST',
-    headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},
-    body:JSON.stringify({name:'EarlyTube',mimeType:'application/vnd.google-apps.folder'})
-  }).then(function(r){return r.json();}).then(function(d){return d.id;});
-}
-
-function createSheet(token,folderId,name){
-  return fetch('https://sheets.googleapis.com/v4/spreadsheets',{
-    method:'POST',
-    headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},
-    body:JSON.stringify({
-      properties:{title:'EarlyTube — '+name},
-      sheets:[{properties:{title:'Videos'},data:[{rowData:[
-        {values:[
-          {userEnteredValue:{stringValue:'title'}},
-          {userEnteredValue:{stringValue:'channel'}},
-          {userEnteredValue:{stringValue:'id'}},
-          {userEnteredValue:{stringValue:'category'}},
-          {userEnteredValue:{stringValue:'age'}},
-          {userEnteredValue:{stringValue:'notes'}}
-        ]}
-      ]}]}]
+function createSheet(t, fId, n) {
+  return fetch('https://sheets.googleapis.com/v4/spreadsheets', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + t, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      properties: { title: 'EarlyTube — ' + n },
+      sheets: [{
+        properties: { title: 'Videos' },
+        data: [{
+          rowData: [{
+            values: [
+              { userEnteredValue: { stringValue: 'title' } },
+              { userEnteredValue: { stringValue: 'channel' } },
+              { userEnteredValue: { stringValue: 'id' } },
+              { userEnteredValue: { stringValue: 'category' } },
+              { userEnteredValue: { stringValue: 'age' } },
+              { userEnteredValue: { stringValue: 'notes' } }
+            ]
+          }]
+        }]
+      }]
     })
-  }).then(function(r){return r.json();}).then(function(d){
-    // Move to EarlyTube folder
-    return fetch('https://www.googleapis.com/drive/v3/files/'+d.spreadsheetId+'?addParents='+folderId+'&removeParents=root',{
-      method:'PATCH',
-      headers:{'Authorization':'Bearer '+token}
-    }).then(function(){return {id:d.spreadsheetId};});
+  }).then(r => r.json()).then(d => {
+    return fetch('https://www.googleapis.com/drive/v3/files/' + d.spreadsheetId + '?addParents=' + fId + '&removeParents=root', {
+      method: 'PATCH',
+      headers: { 'Authorization': 'Bearer ' + t }
+    }).then(() => { return { id: d.spreadsheetId }; });
   });
 }
 
-function loadPersonalVideos(csvUrl){
-  if(!csvUrl)return;
-  fetch(csvUrl+'&t='+Date.now())
-    .then(function(r){return r.text();})
-    .then(function(csv){
-      var rows=parseCSV(csv);
-      if(!rows.length){
-        document.getElementById('personal-video-list').innerHTML='<div class="empty-state">No videos yet. Tap + Add video to get started.</div>';
-        return;
+function loadPersonalVideos(cU) {
+  if (!cU) return;
+  fetch(cU + '&t=' + Date.now()).then(r => r.text()).then(csv => {
+    var rows = parseCSV(csv);
+    if (!rows.length) {
+      document.getElementById('personal-video-list').innerHTML = '<div class="empty-state">No personal videos found.</div>';
+      return;
+    }
+    var h = '';
+    rows.forEach(v => {
+      if (v.id) {
+        h += '<div class="video-item">';
+        h += '<div class="video-thumb" onclick="prepareVideo(\'' + v.id + '\')"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>';
+        h += '<div class="video-info" onclick="prepareVideo(\'' + v.id + '\')">';
+        h += '<div class="video-title">' + escHtml(v.title || v.id) + '</div>';
+        h += '<div class="video-sub">' + escHtml(v.channel || '') + '</div>';
+        h += '</div></div>';
       }
-      var html='';
-      rows.forEach(function(v){
-        if(!v.id)return;
-        html+='<div class="video-item">'
-          +'<div class="video-thumb" onclick="prepareVideo(\''+v.id+'\')">'
-          +'<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>'
-          +'<div class="video-info" onclick="prepareVideo(\''+v.id+'\')">'
-          +'<div class="video-title">'+escHtml(v.title||v.id)+'</div>'
-          +'<div class="video-sub">'+escHtml(v.channel||v.category||'')+'</div>'
-          +'</div></div>';
-      });
-      document.getElementById('personal-video-list').innerHTML=html||'<div class="empty-state">No videos yet.</div>';
-    }).catch(function(){
-      document.getElementById('personal-video-list').innerHTML='<div class="empty-state">Tap + Add video to get started.</div>';
     });
-}
-
-function showAddVideoModal(){document.getElementById('add-video-modal').style.display='flex';}
-function closeAddVideoModal(){document.getElementById('add-video-modal').style.display='none';}
-
-function savePersonalVideo(){
-  var url=document.getElementById('add-url').value.trim();
-  var title=document.getElementById('add-title').value.trim();
-  var category=document.getElementById('add-category').value.trim();
-  var id=extractId(url);
-  if(!id){alert('Please paste a valid YouTube link.');return;}
-  if(!title){alert('Please enter a video title.');return;}
-  var token=localStorage.getItem('et_gtoken');
-  if(!token||!currentUser){alert('Please sign in again.');return;}
-  db.collection('users').doc(currentUser.uid).get().then(function(doc){
-    if(!doc.exists||!doc.data().sheetId){alert('Sheet not found. Please sign out and sign in again.');return;}
-    var sheetId=doc.data().sheetId;
-    fetch('https://sheets.googleapis.com/v4/spreadsheets/'+sheetId+'/values/Videos!A:F:append?valueInputOption=RAW',{
-      method:'POST',
-      headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},
-      body:JSON.stringify({values:[[title,'',id,category,'','']]})
-    }).then(function(){
-      closeAddVideoModal();
-      loadPersonalVideos(doc.data().csvUrl);
-      alert('Video added!');
-    }).catch(function(e){console.error(e);alert('Failed to save. Please try again.');});
+    document.getElementById('personal-video-list').innerHTML = h;
   });
 }
 
-// CSV & Videos
-var CSV_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vSMkmJi2zz99BE6d7STDfVXiBgd1eyfZSdIx4TUsst05Xm4m7G6tz9zGTJXmoVku1DQpmC52vWpOlhI/pub?output=csv';
-var CONTACT_EMAIL='earlytubeapp@gmail.com';
-var FALLBACK={
-  toddler:[{id:'XqZsoesa55w',title:'Baby Shark',channel:'Pinkfong',tag:'Animals'},{id:'yCjJyiqpAuU',title:'Animal Sounds',channel:'Sesame Street',tag:'Animals'}],
-  prek:[{id:'tBhkzYAqhMI',title:'Wild Animals for Kids',channel:'Nat Geo Kids',tag:'Nature'},{id:'pRpeEdMmmQ0',title:'The Alphabet A to Z',channel:'Dave & Ava',tag:'Letters'}],
-  primary:[{id:'n6veBGGHCsY',title:'How Do Plants Grow?',channel:'SciShow Kids',tag:'Science'},{id:'_-OzmBSZXfo',title:'The Solar System',channel:'SciShow Kids',tag:'Science'}],
-  junior:[{id:'xyQY8a-ng6g',title:'How Food Affects Your Brain',channel:'TED-Ed',tag:'Health'},{id:'VtHtnMlMgzI',title:'How Does the Internet Work?',channel:'TED-Ed',tag:'Technology'}],
-  teen:[{id:'sNhhvQGsMEc',title:'The Fermi Paradox',channel:'Kurzgesagt',tag:'Space'},{id:'JnlUkBm0lBQ',title:'How Your Immune System Works',channel:'TED-Ed',tag:'Biology'}],
-  teenplus:[{id:'MBRqu0YOH14',title:'Optimistic Nihilism',channel:'Kurzgesagt',tag:'Philosophy'},{id:'ZSt9tm3RoUU',title:'The Science of Productivity',channel:'AsapSCIENCE',tag:'Psychology'}]
-};
-var allVideos=[],reportingVideo=null;
-var parentPin=localStorage.getItem('et_pin')||'1234';
-var pinBuffer='',pinAction=null,pendingId=null;
+function savePersonalVideo() {
+  var url = document.getElementById('add-url').value;
+  var title = document.getElementById('add-title').value;
+  var cat = document.getElementById('add-category').value;
+  var id = extractId(url);
+  var t = localStorage.getItem('et_gtoken');
+  if (!id || !t) return;
+  db.collection('users').doc(currentUser.uid).get().then(doc => {
+    fetch('https://sheets.googleapis.com/v4/spreadsheets/' + doc.data().sheetId + '/values/Videos!A:F:append?valueInputOption=RAW', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + t, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ values: [[title, '', id, cat, '', '']] })
+    }).then(() => location.reload());
+  });
+}
 
-function parseCSV(t){
-  var l=t.trim().split('\n');if(l.length<2)return[];
-  var h=l[0].split(',').map(function(x){return x.trim().toLowerCase().replace(/"/g,'');});
-  var r=[];
-  for(var i=1;i<l.length;i++){
-    var c=splitCSV(l[i]);if(c.length<3)continue;
-    var o={};h.forEach(function(k,j){o[k]=(c[j]||'').trim().replace(/^"|"$/g,'');});
-    if(o.id)r.push(o);
+var CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSMkmJi2zz99BE6d7STDfVXiBgd1eyfZSdIx4TUsst05Xm4m7G6tz9zGTJXmoVku1DQpmC52vWpOlhI/pub?output=csv';
+var FALLBACK = {
+  toddler: [
+    { id: 'XqZsoesa55w', title: 'Baby Shark', channel: 'Pinkfong' },
+    { id: 'yCjJyiqpAuU', title: 'Animal Sounds', channel: 'Sesame Street' },
+    { id: 'EIrVjO82a5c', title: 'CoComelon Songs', channel: 'CoComelon' },
+    { id: 'WRVsOCh907o', title: 'Wheels on the Bus', channel: 'LittleBabyBum' }
+  ],
+  prek: [
+    { id: 'tBhkzYAqhMI', title: 'Wild Animals', channel: 'Nat Geo Kids' },
+    { id: 'pRpeEdMmmQ0', title: 'The Alphabet', channel: 'Dave & Ava' },
+    { id: 'fS77i74A27A', title: 'Numberblocks', channel: 'Numberblocks' },
+    { id: '71h8MZshGSs', title: 'Blippi at the Zoo', channel: 'Blippi' }
+  ],
+  primary: [
+    { id: 'n6veBGGHCsY', title: 'How Plants Grow', channel: 'SciShow Kids' },
+    { id: '_-OzmBSZXfo', title: 'The Solar System', channel: 'SciShow Kids' },
+    { id: '4XpYf-2mB-c', title: 'States of Matter', channel: 'Dr. Binocs' },
+    { id: 'uOigv_v7S2w', title: 'The Human Body', channel: 'Peekaboo Kids' }
+  ],
+  junior: [
+    { id: 'xyQY8a-ng6g', title: 'Food & Brain', channel: 'TED-Ed' },
+    { id: 'VtHtnMlMgzI', title: 'The Internet', channel: 'TED-Ed' },
+    { id: 'p-V3G_X37-o', title: 'Photosynthesis', channel: 'Peekaboo Kids' },
+    { id: 'H08baO67SBY', title: 'Gravity Explained', channel: 'SciShow Kids' }
+  ],
+  teen: [
+    { id: 'sNhhvQGsMEc', title: 'Fermi Paradox', channel: 'Kurzgesagt' },
+    { id: 'JnlUkBm0lBQ', title: 'Immune System', channel: 'TED-Ed' },
+    { id: 'hY4FfP_OIno', title: 'String Theory', channel: 'Kurzgesagt' },
+    { id: '9P6rdqiybaw', title: 'History of Everything', channel: 'Bill Wurtz' }
+  ],
+  teenplus: [
+    { id: 'MBRqu0YOH14', title: 'Optimistic Nihilism', channel: 'Kurzgesagt' },
+    { id: 'ZSt9tm3RoUU', title: 'Productivity', channel: 'AsapSCIENCE' },
+    { id: '6vY7Y_7Wc80', title: 'Dark Side of Science', channel: 'Veritasium' }
+  ]
+};
+
+var allVideos = [];
+var reportingVideo = null;
+var parentPin = localStorage.getItem('et_pin') || '1234';
+var pinBuffer = '', pinAction = null, pendingId = null;
+
+function parseCSV(t) {
+  var l = t.trim().split('\n');
+  if (l.length < 2) return [];
+  var h = l[0].split(',').map(x => x.trim().toLowerCase().replace(/"/g, ''));
+  var r = [];
+  for (var i = 1; i < l.length; i++) {
+    var c = splitCSV(l[i]);
+    if (c.length < 3) continue;
+    var o = {};
+    h.forEach((k, j) => { o[k] = (c[j] || '').trim().replace(/^"|"$/g, ''); });
+    if (o.id) r.push(o);
   }
   return r;
 }
-function splitCSV(line){
-  var cols=[],cur='',inQ=false;
-  for(var i=0;i<line.length;i++){var c=line[i];if(c==='"'){inQ=!inQ;}else if(c===','&&!inQ){cols.push(cur);cur='';}else{cur+=c;}}
-  cols.push(cur);return cols;
+
+function splitCSV(line) {
+  var cols = [], cur = '', inQ = false;
+  for (var i = 0; i < line.length; i++) {
+    var c = line[i];
+    if (c === '"') { inQ = !inQ; }
+    else if (c === ',' && !inQ) { cols.push(cur); cur = ''; }
+    else { cur += c; }
+  }
+  cols.push(cur);
+  return cols;
 }
 
-function loadVideos(){
-  fetch(CSV_URL).then(function(r){return r.text();}).then(function(csv){
-    var rows=parseCSV(csv);
-    allVideos=rows.filter(function(r){var s=(r.status||'').toLowerCase();return s===''||s==='approved';});
-    document.getElementById('live-dot').style.display=allVideos.length?'block':'none';
+function loadVideos() {
+  fetch(CSV_URL).then(r => r.text()).then(csv => {
+    allVideos = parseCSV(csv).filter(r => (r.status || '').toLowerCase() !== 'rejected');
+    document.getElementById('live-dot').style.display = allVideos.length ? 'block' : 'none';
     renderVideos();
-  }).catch(function(){renderVideos();});
+  }).catch(() => renderVideos());
 }
 
-function renderVideos(){
-  var age=document.getElementById('age-select').value;
-  var f=allVideos.filter(function(v){return(v.age||'').toLowerCase()===age;});
-  if(!f.length)f=FALLBACK[age]||[];
-  var html='';
-  if(!f.length){html='<div class="empty-state">No videos yet.</div>';}
-  else{f.forEach(function(v){
-    html+='<div class="video-item">'
-      +'<div class="video-thumb" onclick="prepareVideo(\''+v.id+'\')">'
-      +'<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>'
-      +'<div class="video-info" onclick="prepareVideo(\''+v.id+'\')">'
-      +'<div class="video-title">'+escHtml(v.title)+'</div>'
-      +'<div class="video-sub">'+escHtml(v.channel||'')+'</div>'
-      +'<div class="video-tag">'+escHtml(v.tag||'')+'</div>'
-      +'<button class="report-btn" onclick="event.stopPropagation();openReportModal(\''+escAttr(v.id)+'\',\''+escAttr(v.title)+'\')">⚑ Suggest a fix</button>'
-      +'</div></div>';
-  });}
-  document.getElementById('video-list').innerHTML=html;
+function renderVideos() {
+  var age = document.getElementById('age-select').value;
+  var f = allVideos.filter(v => (v.age || '').toLowerCase() === age);
+  if (!f.length) f = FALLBACK[age] || [];
+  var h = '';
+  f.forEach(v => {
+    h += '<div class="video-item">';
+    h += '<div class="video-thumb" onclick="prepareVideo(\'' + v.id + '\')"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>';
+    h += '<div class="video-info" onclick="prepareVideo(\'' + v.id + '\')">';
+    h += '<div class="video-title">' + escHtml(v.title) + '</div>';
+    h += '<div class="video-sub">' + escHtml(v.channel) + '</div>';
+    h += '<button class="report-btn" onclick="event.stopPropagation();openReportModal(\'' + v.id + '\',\'' + v.title + '\')">⚑ Suggest a fix</button>';
+    h += '</div></div>';
+  });
+  document.getElementById('video-list').innerHTML = h;
 }
 
-function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function escAttr(s){return(s||'').replace(/'/g,"\\'");}
-
-function openReportModal(id,title){
-  reportingVideo={id:id,title:title};
-  document.getElementById('report-sub').textContent='Reporting: "'+title+'"';
-  document.getElementById('report-email').value='';
-  document.getElementById('report-link').value='';
-  document.getElementById('report-note').value='';
-  document.getElementById('report-modal').style.display='flex';
-  document.getElementById('report-modal').style.pointerEvents='all';
-}
-function closeReportModal(){
-  document.getElementById('report-modal').style.display='none';
-  document.getElementById('report-modal').style.pointerEvents='none';
-  reportingVideo=null;
-}
-function submitReport(){
-  var email=document.getElementById('report-email').value.trim();
-  var link=document.getElementById('report-link').value.trim();
-  var note=document.getElementById('report-note').value.trim();
-  if(!email){alert('Please enter your email.');return;}
-  if(!link){alert('Please paste a YouTube link.');return;}
-  var age=document.getElementById('age-select').value;
-  var sub=encodeURIComponent('EarlyTube suggestion — '+age);
-  var body=encodeURIComponent('Reporting: '+(reportingVideo?reportingVideo.title+' ('+reportingVideo.id+')':'')+'\nReplacement: '+link+'\nAge: '+age+'\nNotes: '+(note||'none')+'\nFrom: '+email);
-  window.location.href='mailto:'+CONTACT_EMAIL+'?subject='+sub+'&body='+body;
-  closeReportModal();
-}
-
-function show(id){document.querySelectorAll('.screen').forEach(function(s){s.style.display='none';});document.getElementById(id).style.display='flex';}
-function extractId(url){
-  var p=[/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,/^([a-zA-Z0-9_-]{11})$/];
-  for(var i=0;i<p.length;i++){var m=url.match(p[i]);if(m)return m[1];}
-  return null;
-}
-function handleWatch(){var id=extractId(document.getElementById('url-input').value.trim());if(!id){document.getElementById('url-error').textContent='Please paste a valid YouTube link.';return;}prepareVideo(id);}
-
-function prepareVideo(id){
-  pendingId=id;
-  document.getElementById('url-error').textContent='';
-  document.getElementById('url-input').value='';
-  document.getElementById('yt-iframe').src='https://www.youtube.com/embed/'+id+'?autoplay=0&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1';
-  document.getElementById('player-overlay').style.display='none';
-  document.getElementById('tap-to-play').style.display='flex';
-  document.getElementById('player-top').style.display='block';
-  document.getElementById('player-bottom').style.display='none';
+function prepareVideo(id) {
+  pendingId = id;
+  document.getElementById('yt-iframe').src = 'https://www.youtube.com/embed/' + id + '?autoplay=0&controls=0&disablekb=1&modestbranding=1&rel=0&playsinline=1';
+  document.getElementById('player-overlay').style.display = 'none';
+  document.getElementById('tap-to-play').style.display = 'flex';
+  document.getElementById('player-top').style.display = 'block';
+  document.getElementById('player-bottom').style.display = 'none';
   document.getElementById('lock-toast').classList.add('hidden');
   buildNextVideos(id);
   show('player-screen');
 }
 
-function startVideo(){
-  document.getElementById('yt-iframe').src='https://www.youtube.com/embed/'+pendingId+'?autoplay=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1';
-  document.getElementById('tap-to-play').style.display='none';
+function startVideo() {
+  document.getElementById('yt-iframe').src = 'https://www.youtube.com/embed/' + pendingId + '?autoplay=1&controls=0&disablekb=1&modestbranding=1&rel=0&playsinline=1';
+  document.getElementById('tap-to-play').style.display = 'none';
 }
 
-function lockControls(){
-  document.getElementById('player-overlay').style.display='block';
-  document.getElementById('player-top').style.display='none';
-  document.getElementById('player-bottom').style.display='block';
-  var toast=document.getElementById('lock-toast');
-  toast.classList.remove('hidden');
-  toast.textContent='🔒 Locked';
-  setTimeout(function(){toast.classList.add('hidden');},1500);
+function lockControls() {
+  document.getElementById('player-overlay').style.display = 'block';
+  document.getElementById('player-top').style.display = 'none';
+  document.getElementById('player-bottom').style.display = 'block';
+  var t = document.getElementById('lock-toast');
+  t.classList.remove('hidden');
+  setTimeout(() => t.classList.add('hidden'), 1500);
 }
 
-function buildNextVideos(currentId){
-  var age=document.getElementById('age-select').value;
-  var f=allVideos.filter(function(v){return(v.age||'').toLowerCase()===age&&v.id!==currentId;});
-  if(!f.length)f=(FALLBACK[age]||[]).filter(function(v){return v.id!==currentId;});
-  var html='';
-  f.slice(0,3).forEach(function(v){
-    html+='<button class="next-video-btn" onclick="prepareVideo(\''+v.id+'\')">'
-      +'<div class="next-play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>'
-      +'<div><div class="next-video-title">'+escHtml(v.title)+'</div>'
-      +'<div class="next-video-sub">'+escHtml(v.channel||'')+'</div></div>'
-      +'</button>';
+function buildNextVideos(curr) {
+  var age = document.getElementById('age-select').value;
+  var f = allVideos.filter(v => (v.age || '').toLowerCase() === age && v.id !== curr).slice(0, 3);
+  if (!f.length) f = (FALLBACK[age] || []).filter(v => v.id !== curr).slice(0,3);
+  var h = '';
+  f.forEach(v => {
+    h += '<button class="next-video-btn" onclick="prepareVideo(\'' + v.id + '\')">';
+    h += '<div class="next-play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>';
+    h += '<div><div class="next-video-title">' + escHtml(v.title) + '</div></div>';
+    h += '</button>';
   });
-  document.getElementById('next-videos').innerHTML=html||'<div style="font-size:12px;color:#666;">No more videos.</div>';
+  document.getElementById('next-videos').innerHTML = h;
 }
 
-function closeVideo(){
-  document.getElementById('yt-iframe').src='';
-  document.getElementById('player-overlay').style.display='none';
-  document.getElementById('player-top').style.display='block';
-  document.getElementById('player-bottom').style.display='none';
-  document.getElementById('tap-to-play').style.display='none';
-  show('home');
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
+  document.getElementById(id).style.display = 'flex';
 }
 
-function showHome(){show('home');}
-function requestClose(){pinAction='close';showPin('Parent PIN required','Enter your PIN to close this video');}
-function requestSettings(){pinAction='settings';showPin('Parent PIN required','Enter your PIN to open Settings');}
-function showPin(title,sub){pinBuffer='';updateDots();document.getElementById('pin-error').textContent='';document.getElementById('pin-title').textContent=title;document.getElementById('pin-subtitle').textContent=sub;document.getElementById('pin-overlay').style.display='flex';}
-function pinPress(d){if(pinBuffer.length>=4)return;pinBuffer+=d;updateDots();if(pinBuffer.length===4)setTimeout(checkPin,120);}
-function pinClear(){pinBuffer=pinBuffer.slice(0,-1);updateDots();}
-function pinCancel(){document.getElementById('pin-overlay').style.display='none';pinBuffer='';}
-function updateDots(){for(var i=0;i<4;i++)document.getElementById('d'+i).className='dot'+(i<pinBuffer.length?' filled':'');}
-function checkPin(){
-  if(pinBuffer===parentPin){
-    document.getElementById('pin-overlay').style.display='none';
-    if(pinAction==='close')closeVideo();
-    if(pinAction==='settings')show('settings-screen');
-  }else{document.getElementById('pin-error').textContent='Incorrect PIN — try again';pinBuffer='';updateDots();}
+function escHtml(s) {
+  return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
-function saveSettings(){var np=document.getElementById('new-pin').value.trim();if(/^\d{4}$/.test(np)){parentPin=np;localStorage.setItem('et_pin',np);alert('PIN updated!');showHome();}else{alert('Please enter exactly 4 digits.');}}
 
-var logoTimer;
-var logo=document.getElementById('logo');
-logo.addEventListener('touchstart',function(){logoTimer=setTimeout(requestSettings,800);});
-logo.addEventListener('touchend',function(){clearTimeout(logoTimer);});
-logo.addEventListener('mousedown',function(){logoTimer=setTimeout(requestSettings,800);});
-logo.addEventListener('mouseup',function(){clearTimeout(logoTimer);});
+function extractId(url) {
+  var m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
 
-history.pushState(null,'','#');
-history.pushState(null,'','#');
-window.addEventListener('popstate',function(){
-  history.pushState(null,'','#');
-  var player=document.getElementById('player-screen');
-  if(player&&player.style.display==='flex'){requestClose();}
-});
+function handleWatch() {
+  var id = extractId(document.getElementById('url-input').value.trim());
+  if (id) prepareVideo(id);
+  else document.getElementById('url-error').textContent = 'Invalid link.';
+}
+
+function requestClose() { pinAction = 'close'; showPin(); }
+function requestSettings() { pinAction = 'settings'; showPin(); }
+
+function showPin() {
+  pinBuffer = '';
+  updateDots();
+  document.getElementById('pin-overlay').style.display = 'flex';
+}
+
+function pinPress(d) {
+  if (pinBuffer.length < 4) {
+    pinBuffer += d;
+    updateDots();
+    if (pinBuffer.length === 4) setTimeout(checkPin, 100);
+  }
+}
+
+function pinClear() { pinBuffer = pinBuffer.slice(0, -1); updateDots(); }
+function pinCancel() { document.getElementById('pin-overlay').style.display = 'none'; }
+
+function updateDots() {
+  for (var i = 0; i < 4; i++) {
+    document.getElementById('d' + i).className = 'dot' + (i < pinBuffer.length ? ' filled' : '');
+  }
+}
+
+function checkPin() {
+  if (pinBuffer === parentPin) {
+    document.getElementById('pin-overlay').style.display = 'none';
+    if (pinAction === 'close') location.reload();
+    if (pinAction === 'settings') show('settings-screen');
+  } else {
+    pinBuffer = '';
+    updateDots();
+    document.getElementById('pin-error').textContent = 'Incorrect PIN';
+  }
+}
+
+function saveSettings() {
+  var np = document.getElementById('new-pin').value;
+  if (np.length === 4) {
+    parentPin = np;
+    localStorage.setItem('et_pin', np);
+    show('home');
+  }
+}
+
+function showHome() { show('home'); }
+
+function openReportModal(id, t) {
+  reportingVideo = { id, t };
+  document.getElementById('report-sub').textContent = 'Reporting: ' + t;
+  document.getElementById('report-modal').style.display = 'flex';
+}
+
+function closeReportModal() { document.getElementById('report-modal').style.display = 'none'; }
+
+function submitReport() {
+  var l = document.getElementById('report-link').value;
+  location.href = 'mailto:earlytubeapp@gmail.com?subject=Fix&body=ID:' + reportingVideo.id + ' Replace:' + l;
+  closeReportModal();
+}
+
+function showAddVideoModal() { document.getElementById('add-video-modal').style.display = 'flex'; }
+function closeAddVideoModal() { document.getElementById('add-video-modal').style.display = 'none'; }
+
+var logo = document.getElementById('logo');
+var lTimer;
+logo.addEventListener('touchstart', () => lTimer = setTimeout(requestSettings, 800));
+logo.addEventListener('touchend', () => clearTimeout(lTimer));
 
 loadVideos();
 </script>
-
 </body>
 </html>
