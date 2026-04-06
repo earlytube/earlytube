@@ -437,15 +437,7 @@ auth.onAuthStateChanged(function(user){
   if(user){
     currentUser=user;
     updateAuthUI(user);
-    auth.getRedirectResult().then(function(result){
-      if(result&&result.credential&&result.credential.accessToken){
-        var token=result.credential.accessToken;
-        localStorage.setItem('et_gtoken',token);
-        setupUserProfile(user,token);
-      } else {
-        loadUserProfile(user);
-      }
-    }).catch(function(){loadUserProfile(user);});
+    loadUserProfile(user);
   } else {
     updateAuthUI(null);
   }
