@@ -1,0 +1,23 @@
+{
+“name”: “EarlyTube”,
+“short_name”: “EarlyTube”,
+“description”: “YouTube for young children — no rewind, no skip, no controls.”,
+“start_url”: “/”,
+“scope”: “/”,
+“display”: “standalone”,
+“orientation”: “portrait”,
+“background_color”: “#0F0F11”,
+“theme_color”: “#E53935”,
+“icons”: [
+{
+“src”: “icon.png”,
+“sizes”: “192x192”,
+“type”: “image/png”
+},
+{
+“src”: “icon.png”,
+“sizes”: “512x512”,
+“type”: “image/png”
+}
+]
+}
