@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
-<!-- v1.4 -->
+<!-- v1.5 -->
 <title>EarlyTube</title>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -420,19 +420,29 @@ provider.addScope('https://www.googleapis.com/auth/drive.file');
 provider.addScope('https://www.googleapis.com/auth/spreadsheets');
 
 function signIn(){
-  auth.signInWithRedirect(provider);
-}
-
-// Handle redirect result on page load
-auth.getRedirectResult().then(function(result){
-  if(result&&result.user&&result.credential){
-    var token=result.credential.accessToken;
-    localStorage.setItem('et_gtoken',token);
-    setupUserProfile(result.user,token);
+  var isSafari=/^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  if(isSafari){
+    auth.signInWithRedirect(provider);
+  } else {
+    auth.signInWithPopup(provider).then(function(result){
+      if(result&&result.credential){
+        var token=result.credential.accessToken;
+        localStorage.setItem('et_gtoken',token);
+        currentUser=result.user;
+        setupUserProfile(result.user,token);
+        document.getElementById('auth-signed-out').style.display='none';
+        document.getElementById('auth-signed-in').style.display='flex';
+        var av=document.getElementById('auth-avatar');
+        if(result.user.photoURL){av.innerHTML='<img src="'+result.user.photoURL+'" alt=""/>';}
+        else{av.textContent=result.user.displayName?result.user.displayName[0].toUpperCase():'U';}
+        document.getElementById('auth-name').textContent=result.user.displayName||result.user.email;
+      }
+    }).catch(function(e){
+      console.error('Popup error',e);
+      auth.signInWithRedirect(provider);
+    });
   }
-}).catch(function(e){
-  console.error('Redirect error',e);
-});
+}
 
 function signOut(){
   auth.signOut().then(function(){
