@@ -834,6 +834,9 @@ function prepareVideo(id){
   document.getElementById('player-top').style.display='block';
   document.getElementById('player-bottom').style.display='none';
   document.getElementById('lock-toast').classList.add('hidden');
+  // Restore next-video section visibility (hidden when locked)
+  document.getElementById('next-videos').style.display='';
+  document.querySelector('.next-title').style.display='';
   buildNextVideos(id);
   show('player-screen');
 }
@@ -845,14 +848,28 @@ function lockControls(){
   document.getElementById('player-overlay').style.display='block';
   document.getElementById('player-top').style.display='none';
   document.getElementById('player-bottom').style.display='block';
+  // Hide next-video buttons when locked — child cannot stim by switching videos
+  document.getElementById('next-videos').style.display='none';
+  document.querySelector('.next-title').style.display='none';
   var toast=document.getElementById('lock-toast');
   toast.classList.remove('hidden');toast.textContent='🔒 Locked';
   setTimeout(function(){toast.classList.add('hidden');},1500);
 }
 function buildNextVideos(currentId){
-  var age=document.getElementById('age-select').value;
-  var f=allVideos.filter(function(v){return(v.age||'').toLowerCase()===age&&v.id!==currentId;});
-  if(!f.length)f=(FALLBACK[age]||[]).filter(function(v){return v.id!==currentId;});
+  var f=[];
+  if(currentUser){
+    // Signed in — only use personal videos, never fall back to curated
+    Object.keys(personalVideosData).forEach(function(cat){
+      personalVideosData[cat].forEach(function(v){
+        if(v.id!==currentId)f.push(v);
+      });
+    });
+  } else {
+    // Not signed in — use curated list
+    var age=document.getElementById('age-select').value;
+    f=allVideos.filter(function(v){return(v.age||'').toLowerCase()===age&&v.id!==currentId;});
+    if(!f.length)f=(FALLBACK[age]||[]).filter(function(v){return v.id!==currentId;});
+  }
   var html='';
   f.slice(0,3).forEach(function(v){
     html+='<button class="next-video-btn" onclick="prepareVideo(\''+v.id+'\')">'
