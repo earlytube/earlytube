@@ -578,7 +578,9 @@ function createFreshSetup(token,user){
 }
 
 // ── LOAD PERSONAL VIDEOS ─────────────────────────────────────────────────────
-// Fix: run extractId() on column C so full YouTube URLs work, not just bare IDs
+// Accepts full YouTube URLs or bare IDs in column C.
+// Rows with no title in column A get their title fetched via oEmbed,
+// then written back to the sheet so it's cached for next load.
 function loadPersonalVideos(sheetId,token){
   if(!token)token=localStorage.getItem('et_gtoken');
   if(!token||!sheetId)return;
@@ -588,26 +590,30 @@ function loadPersonalVideos(sheetId,token){
   .then(function(data){
     if(data.error){showNoVideosState(userSheetUrl);return;}
     var rows=data.values||[];
-    var videoRows=[];
+    var hasVideos=false;
+    var needsTitleFetch=[]; // {sheetRow, id, cat}
+    personalVideosData={};
     for(var i=1;i<rows.length;i++){
-      if(rows[i]&&rows[i][2]&&rows[i][2].trim())videoRows.push(rows[i]);
+      var row=rows[i];
+      if(!row||!row[2]||!row[2].trim())continue;
+      var id=extractId(row[2].trim())||row[2].trim();
+      if(!id)continue;
+      var title=row[0]||'';
+      var cat=row[3]||'My Videos';
+      if(!personalVideosData[cat])personalVideosData[cat]=[];
+      personalVideosData[cat].push({title:title,id:id});
+      hasVideos=true;
+      if(!title){
+        // sheetRow: i+1 because rows[] is 0-based and row 0 is the header (sheet row 1)
+        needsTitleFetch.push({sheetRow:i+1,id:id,cat:cat});
+      }
     }
-    if(videoRows.length===0){showNoVideosState(userSheetUrl);return;}
+    if(!hasVideos){showNoVideosState(userSheetUrl);return;}
     document.getElementById('no-videos-card').style.display='none';
     document.getElementById('suggested-card').style.display='none';
     document.getElementById('paste-card').style.display='none';
     document.getElementById('personal-card').style.display='block';
     document.getElementById('sheet-link').href=userSheetUrl||'#';
-    personalVideosData={};
-    videoRows.forEach(function(row){
-      var title=row[0]||'';
-      // Accept full YouTube URLs or bare IDs in column C
-      var id=extractId(row[2].trim())||row[2].trim();
-      var cat=row[3]||'My Videos';
-      if(!id)return;
-      if(!personalVideosData[cat])personalVideosData[cat]=[];
-      personalVideosData[cat].push({title:title,id:id});
-    });
     var cats=Object.keys(personalVideosData);
     var sel=document.getElementById('category-select');
     var prev=sel.value;
@@ -620,9 +626,48 @@ function loadPersonalVideos(sheetId,token){
     });
     if(prev&&personalVideosData[prev])sel.value=prev;
     renderPersonalCategory();
+    if(needsTitleFetch.length>0)fetchMissingTitles(sheetId,token,needsTitleFetch);
   }).catch(function(e){
     console.error('Load error',e);
     showNoVideosState(userSheetUrl);
+  });
+}
+
+// Fetch oEmbed titles for rows that had an empty title column,
+// update the UI immediately, then write the titles back to the sheet.
+function fetchMissingTitles(sheetId,token,items){
+  var promises=items.map(function(item){
+    return fetch('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v='+item.id+'&format=json')
+      .then(function(r){return r.ok?r.json():{title:''};})
+      .then(function(d){item.title=d.title||'';return item;})
+      .catch(function(){item.title='';return item;});
+  });
+  Promise.all(promises).then(function(resolved){
+    // Update personalVideosData and re-render
+    var updated=false;
+    resolved.forEach(function(item){
+      if(!item.title)return;
+      var vids=personalVideosData[item.cat]||[];
+      for(var i=0;i<vids.length;i++){
+        if(vids[i].id===item.id&&!vids[i].title){
+          vids[i].title=item.title;updated=true;break;
+        }
+      }
+    });
+    if(updated)renderPersonalCategory();
+    // Write fetched titles back to sheet (batch)
+    var toWrite=resolved.filter(function(i){return i.title;});
+    if(!toWrite.length)return;
+    fetch('https://sheets.googleapis.com/v4/spreadsheets/'+sheetId+'/values:batchUpdate',{
+      method:'POST',
+      headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},
+      body:JSON.stringify({
+        valueInputOption:'RAW',
+        data:toWrite.map(function(item){
+          return{range:'Videos!A'+item.sheetRow,values:[[item.title]]};
+        })
+      })
+    }).catch(function(e){console.error('Title backfill error',e);});
   });
 }
 
