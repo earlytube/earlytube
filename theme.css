@@ -5,52 +5,52 @@ Edit this file to change the look of the entire app.
 
 :root {
 /* Primary action (buttons, links) — Calming Emerald */
-–red:        #10B981;
-–red-dark:   #059669;
-–red-light:  #022C22;
+-–red:        #10B981;
+-–red-dark:   #059669;
+-–red-light:  #022C22;
 
 /* Page */
-–bg:         #0F172A;   /* Deep Navy Charcoal */
-–card:       #1E293B;   /* Navy Slate         */
-–border:     #334155;
+-–bg:         #0F172A;   /* Deep Navy Charcoal */
+-–card:       #1E293B;   /* Navy Slate         */
+-–border:     #334155;
 
 /* Text */
-–text:       #F8FAFC;   /* Clean Off-White    */
-–text-2:     #94A3B8;
-–text-3:     #64748B;
+-–text:       #F8FAFC;   /* Clean Off-White    */
+-–text-2:     #94A3B8;
+-–text-3:     #64748B;
 
 /* Accent — Soft Gold (tagline, highlights) */
-–accent:     #F59E0B;
+-–accent:     #F59E0B;
 
 /* Misc surfaces */
-–badge-bg:   #1E293B;
-–video-bg:   #1E293B;
-–input-bg:   #0F172A;
+-–badge-bg:   #1E293B;
+-–video-bg:   #1E293B;
+-–input-bg:   #0F172A;
 
-–shadow:     0 1px 4px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.3);
-–radius:     14px;
+-–shadow:     0 1px 4px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.3);
+-–radius:     14px;
 
 /* Info / warning box */
-–info-bg:      #1E293B;
-–info-border:  #334155;
-–info-text:    #F59E0B;
+-–info-bg:      #1E293B;
+-–info-border:  #334155;
+-–info-text:    #F59E0B;
 
 /* Video cards */
-–video-card-bg:     #1E293B;
-–video-card-border: #334155;
-–video-card-radius: 20px;
+-–video-card-bg:     #1E293B;
+-–video-card-border: #334155;
+-–video-card-radius: 20px;
 
 /* Player screen */
-–player-bg:         #020617;
-–player-btn-bg:     #0F172A;
-–player-btn-border: #1E293B;
+-–player-bg:         #020617;
+-–player-btn-bg:     #0F172A;
+-–player-btn-border: #1E293B;
 }
 
 /* ── Dark mode (already dark, deepen slightly) ── */
 @media (prefers-color-scheme: dark) {
 :root {
-–bg:    #080E1A;
-–card:  #131E2E;
-–border:#2A3A50;
+–-bg:    #080E1A;
+–-card:  #131E2E;
+–-border:#2A3A50;
 }
 }
