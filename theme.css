@@ -6,75 +6,75 @@ Edit this file to change the look of the entire app.
 /* ── Light mode ── */
 :root {
 /* Brand / accent */
-–red:        #C05621;   /* buttons, links, highlights  */
-–red-dark:   #9C4221;   /* hover / pressed states      */
-–red-light:  #FDF4ED;   /* tinted backgrounds          */
+-–red:        #C05621;   /* buttons, links, highlights  */
+-–red-dark:   #9C4221;   /* hover / pressed states      */
+-–red-light:  #FDF4ED;   /* tinted backgrounds          */
 
 /* Page */
-–bg:         #FDFCF0;   /* page background             */
-–card:       #F3E5D8;   /* card / section background   */
-–border:     #E2E8F0;   /* dividers and input borders  */
+-–bg:         #FDFCF0;   /* page background             */
+-–card:       #F3E5D8;   /* card / section background   */
+-–border:     #E2E8F0;   /* dividers and input borders  */
 
 /* Text */
-–text:       #334155;   /* primary text                */
-–text-2:     #64748B;   /* secondary / label text      */
-–text-3:     #94A3B8;   /* placeholder / muted text    */
+-–text:       #334155;   /* primary text                */
+-–text-2:     #64748B;   /* secondary / label text      */
+-–text-3:     #94A3B8;   /* placeholder / muted text    */
 
 /* Misc surfaces */
-–badge-bg:   #FFFEF5;   /* pill badges                 */
-–video-bg:   #FFFEF5;   /* video card background       */
-–input-bg:   #FDFCF0;   /* text input background       */
+-–badge-bg:   #FFFEF5;   /* pill badges                 */
+-–video-bg:   #FFFEF5;   /* video card background       */
+-–input-bg:   #FDFCF0;   /* text input background       */
 
 /* Shadow — set to ‘none’ for completely flat */
-–shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+-–shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 
 /* Border radius */
-–radius: 14px;
+-–radius: 14px;
 
 /* Info / warning box */
-–info-bg:      #FDF4ED;
-–info-border:  #E8D5C4;
-–info-text:    #5C3A1E;
+-–info-bg:      #FDF4ED;
+-–info-border:  #E8D5C4;
+-–info-text:    #5C3A1E;
 
 /* Video cards */
-–video-card-bg:     #FFFEF5;
-–video-card-border: #E2E8F0;
-–video-card-radius: 20px;
+-–video-card-bg:     #FFFEF5;
+–-video-card-border: #E2E8F0;
+–-video-card-radius: 20px;
 
 /* Player screen */
-–player-bg:         #1A1008;
-–player-btn-bg:     #2A1A0A;
-–player-btn-border: #3A2A1A;
+–-player-bg:         #1A1008;
+–-player-btn-bg:     #2A1A0A;
+–-player-btn-border: #3A2A1A;
 }
 
 /* ── Dark mode overrides ── */
 @media (prefers-color-scheme: dark) {
 :root {
-–red:        #D97150;
-–red-dark:   #A0522D;
-–red-light:  #2D1B0E;
+-–red:        #D97150;
+-–red-dark:   #A0522D;
+–-red-light:  #2D1B0E;
 
 ```
--bg:         #0F0F11;
--card:       #1C1C1E;
--border:     #2C2C2E;
+--bg:         #0F0F11;
+--card:       #1C1C1E;
+--border:     #2C2C2E;
 
--text:       #F2F2F7;
--text-2:     #9CA3AF;
--text-3:     #6B7280;
+--text:       #F2F2F7;
+--text-2:     #9CA3AF;
+--text-3:     #6B7280;
 
--shadow:     0 1px 4px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
+--shadow:     0 1px 4px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
 
--badge-bg:   #1C1C1E;
--video-bg:   #2C2C2E;
--input-bg:   #2C2C2E;
+--badge-bg:   #1C1C1E;
+--video-bg:   #2C2C2E;
+--input-bg:   #2C2C2E;
 
--info-bg:      #2C1A0E;
--info-border:  #5C2E10;
--info-text:    #FDBA74;
+--info-bg:      #2C1A0E;
+--info-border:  #5C2E10;
+--info-text:    #FDBA74;
 
--video-card-bg:     #2C2C2E;
--video-card-border: #3C3C3E;
+--video-card-bg:     #2C2C2E;
+--video-card-border: #3C3C3E;
 ```
 
 }
