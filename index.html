@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
-<!-- v2.3 -->
+<!-- v2.4 paper & ink -->
 <title>EarlyTube</title>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -16,7 +16,7 @@
 <link rel="apple-touch-icon" href="icon.png"/>
 <link rel="icon" type="image/png" href="icon.png"/>
 <link rel="manifest" href="manifest.json"/>
-<meta name="theme-color" content="#E53935"/>
+<meta name="theme-color" content="#C05621"/>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2DFE2R37G1"></script>
 <script>
   window.dataLayer=window.dataLayer||[];
@@ -30,22 +30,22 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
   :root{
-    --red:#E53935;--red-dark:#B71C1C;--red-light:#FFEBEE;
-    --bg:#F7F8FA;--card:#FFFFFF;--border:#E8EAF0;
-    --text:#1A1D23;--text-2:#6B7280;--text-3:#9CA3AF;
-    --radius:14px;--shadow:0 1px 4px rgba(0,0,0,0.07),0 4px 16px rgba(0,0,0,0.05);
-    --badge-bg:#FFFFFF;--video-bg:#F7F8FA;--input-bg:#F7F8FA;
+    --red:#C05621;--red-dark:#9C4221;--red-light:#FDF4ED;
+    --bg:#FDFCF0;--card:#F3E5D8;--border:#E2E8F0;
+    --text:#334155;--text-2:#64748B;--text-3:#94A3B8;
+    --radius:14px;--shadow:0 1px 2px rgba(0,0,0,0.04);
+    --badge-bg:#FFFFFF;--video-bg:#FFFFFF;--input-bg:#FDFCF0;
   }
   @media(prefers-color-scheme:dark){
     :root{
-      --red:#EF5350;--red-dark:#C62828;--red-light:#2C1A1A;
+      --red:#D97150;--red-dark:#A0522D;--red-light:#2D1B0E;
       --bg:#0F0F11;--card:#1C1C1E;--border:#2C2C2E;
       --text:#F2F2F7;--text-2:#9CA3AF;--text-3:#6B7280;
       --shadow:0 1px 4px rgba(0,0,0,0.3),0 4px 16px rgba(0,0,0,0.2);
       --badge-bg:#1C1C1E;--video-bg:#2C2C2E;--input-bg:#2C2C2E;
     }
-    .info-card{background:#2C1A1A!important;border-color:#5C2020!important;}
-    .info-card p{color:#FCA5A5!important;}
+    .info-card{background:#2C1A0E!important;border-color:#5C2E10!important;}
+    .info-card p{color:#FDBA74!important;}
     .modal-box{background:#1C1C1E!important;}
     .modal-input{background:#2C2C2E!important;color:#F2F2F7!important;}
     .signin-card{background:#1C1C1E!important;}
@@ -75,16 +75,16 @@
   .signin-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 18px;width:calc(100% - 48px);max-width:800px;margin:0 24px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
   .signin-card-text{font-size:12px;color:var(--text-2);line-height:1.5;}
   .signin-card-text strong{color:var(--text);display:block;font-size:13px;margin-bottom:2px;}
-  .btn-signin{display:flex;align-items:center;gap:6px;background:white;border:1px solid var(--border);border-radius:8px;padding:8px 12px;cursor:pointer;font-size:12px;font-weight:600;color:#1A1D23;font-family:inherit;white-space:nowrap;flex-shrink:0;}
+  .btn-signin{display:flex;align-items:center;gap:6px;background:white;border:1px solid var(--border);border-radius:8px;padding:8px 12px;cursor:pointer;font-size:12px;font-weight:600;color:#334155;font-family:inherit;white-space:nowrap;flex-shrink:0;}
   .btn-signin svg{width:14px;height:14px;flex-shrink:0;}
   .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;width:calc(100% - 48px);max-width:800px;margin:0 24px 12px;}
   .input-label{font-size:12px;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;}
   .input-desc{font-size:12px;color:var(--text-3);margin-bottom:10px;line-height:1.5;}
   .input-wrap{display:flex;gap:10px;}
-  .input-wrap input{flex:1;padding:13px 16px;border-radius:10px;border:1.5px solid var(--border);background:var(--input-bg);color:var(--text);font-size:15px;font-family:inherit;outline:none;}
+  .input-wrap input{flex:1;padding:14px 16px;border-radius:10px;border:1.5px solid var(--border);background:var(--input-bg);color:var(--text);font-size:15px;font-family:inherit;outline:none;}
   .input-wrap input:focus{border-color:var(--red);}
   .input-wrap input::placeholder{color:var(--text-3);}
-  .btn-watch{padding:13px 22px;border-radius:10px;background:#E53935;color:white;border:none;font-weight:600;font-size:15px;font-family:inherit;cursor:pointer;white-space:nowrap;}
+  .btn-watch{padding:14px 24px;border-radius:10px;background:var(--red);color:white;border:none;font-weight:600;font-size:15px;font-family:inherit;cursor:pointer;white-space:nowrap;}
   .error-msg{font-size:12.5px;color:var(--red);margin-top:8px;min-height:16px;}
   .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
   .section-left{display:flex;align-items:center;gap:8px;}
@@ -94,89 +94,86 @@
   .age-select{padding:6px 10px;border-radius:8px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);font-size:13px;font-family:inherit;outline:none;cursor:pointer;}
   .btn-add-video{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--red);background:var(--red-light);border:1px solid var(--red);border-radius:8px;padding:6px 12px;cursor:pointer;font-family:inherit;font-weight:600;}
   .video-list{display:flex;flex-direction:column;gap:10px;}
-  .video-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;background:var(--video-bg);border:1px solid var(--border);border-radius:10px;}
-  .video-thumb{width:42px;height:42px;border-radius:8px;background:#E53935;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;}
+  .video-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:20px;}
+  .video-thumb{width:42px;height:42px;border-radius:12px;background:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;}
   .video-thumb svg{width:16px;height:16px;fill:white;}
   .video-info{flex:1;min-width:0;cursor:pointer;}
-  .video-title{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .video-title{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text);}
   .video-sub{font-size:12px;color:var(--text-3);margin-top:2px;}
   .video-tag{font-size:10px;font-weight:600;background:var(--red-light);color:var(--red);padding:2px 7px;border-radius:5px;margin-top:6px;display:inline-block;}
   .report-btn{display:flex;align-items:center;gap:5px;margin-top:8px;font-size:12px;color:var(--red);background:var(--red-light);border:1px solid var(--red);border-radius:8px;padding:6px 12px;cursor:pointer;font-family:inherit;font-weight:500;}
   .loading-state,.empty-state{text-align:center;padding:24px;color:var(--text-3);font-size:13px;}
   .sheet-link{font-size:11px;color:var(--text-3);text-decoration:none;display:block;margin-top:10px;}
-  .info-card{background:var(--red-light);border:1px solid #FFCDD2;border-radius:var(--radius);padding:16px 18px;width:calc(100% - 48px);max-width:800px;margin:0 24px 16px;}
-  .info-card p{font-size:13px;color:#B71C1C;line-height:1.65;}
+  .info-card{background:#FDF4ED;border:1px solid #E8D5C4;border-radius:var(--radius);padding:16px 18px;width:calc(100% - 48px);max-width:800px;margin:0 24px 16px;}
+  .info-card p{font-size:13px;color:#5C3A1E;line-height:1.65;}
   .kofi-bar{width:calc(100% - 48px);max-width:800px;margin:0 24px 24px;text-align:center;}
   .kofi-bar a{font-size:12px;color:var(--text-3);text-decoration:none;}
   .kofi-bar a:hover{color:var(--red);}
-
-#player-screen{background:#000;width:100%;}
-.player-top{background:#111;padding:14px 20px;width:100%;}
-.player-instruction{font-size:13px;color:#aaa;margin-bottom:12px;line-height:1.5;}
-.btn-lock{width:100%;padding:14px;border-radius:10px;background:#E53935;border:none;color:white;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;}
-.player-wrap{position:relative;width:100%;background:#000;}
-#yt-iframe{display:block;width:100%;aspect-ratio:16/9;border:none;}
-.player-overlay{display:none;position:absolute;top:0;left:0;width:100%;height:100%;z-index:10;}
-.tap-to-play{position:absolute;top:0;left:0;width:100%;height:100%;z-index:20;background:rgba(0,0,0,0.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;cursor:pointer;}
-.play-circle{width:76px;height:76px;background:#E53935;border-radius:50%;display:flex;align-items:center;justify-content:center;}
-.play-circle svg{width:28px;height:28px;fill:white;margin-left:4px;}
-.tap-to-play p{font-size:15px;color:rgba(255,255,255,0.75);font-weight:500;}
-.lock-toast{position:absolute;top:16px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.85);color:white;font-size:15px;font-weight:700;padding:10px 20px;border-radius:20px;z-index:15;white-space:nowrap;transition:opacity 0.3s;border:1px solid rgba(255,255,255,0.15);}
-.lock-toast.hidden{opacity:0;pointer-events:none;}
-.player-bottom{background:#111;padding:14px 20px;width:100%;display:none;}
-.next-title{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;margin-bottom:10px;}
-.next-videos{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
-.next-video-btn{background:#1C1C1E;border:1px solid #2C2C2E;color:white;border-radius:10px;padding:12px 14px;text-align:left;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:10px;width:100%;}
-.next-play-icon{width:28px;height:28px;background:#E53935;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.next-play-icon svg{width:12px;height:12px;fill:white;}
-.next-video-title{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.next-video-sub{font-size:11px;color:#666;margin-top:2px;}
-.btn-close{width:100%;padding:14px;border-radius:10px;background:#2C2C2E;border:1px solid #3C3C3E;color:#aaa;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;}
-.btn-close svg{width:14px;height:14px;fill:#666;}
-#pin-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,15,0.92);z-index:100;flex-direction:column;align-items:center;justify-content:center;gap:18px;}
-.pin-icon{width:52px;height:52px;background:#1C1C2E;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;}
-.pin-icon svg{width:22px;height:22px;fill:#9CA3AF;}
-#pin-overlay h2{font-size:18px;font-weight:600;color:white;}
-#pin-overlay p{font-size:13px;color:#9CA3AF;margin-top:-8px;}
-.pin-dots{display:flex;gap:12px;margin:4px 0;}
-.dot{width:14px;height:14px;border-radius:50%;background:#2C2C3E;transition:background 0.12s,transform 0.12s;}
-.dot.filled{background:#E53935;transform:scale(1.1);}
-.pin-error{font-size:12.5px;color:#F87171;height:16px;}
-.pin-grid{display:grid;grid-template-columns:repeat(3,72px);gap:10px;}
-.pin-btn{height:72px;border-radius:12px;background:#1C1C2E;border:1px solid #2C2C3E;color:white;font-size:22px;font-weight:500;font-family:inherit;cursor:pointer;}
-.pin-btn:active{background:#2C2C3E;}
-.pin-hint{font-size:11px;color:#4B5563;margin-top:4px;}
-.pin-forgot{font-size:12px;color:var(–red);background:none;border:none;cursor:pointer;font-family:inherit;margin-top:2px;text-decoration:underline;}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,15,0.85);z-index:200;align-items:flex-end;justify-content:center;}
-.modal-box{background:var(–card);border:1px solid var(–border);border-radius:20px 20px 0 0;padding:28px 24px 40px;width:100%;max-width:560px;}
-.modal-title{font-size:17px;font-weight:700;margin-bottom:4px;}
-.modal-sub{font-size:13px;color:var(–text-2);margin-bottom:20px;line-height:1.5;}
-.modal-label{font-size:12px;font-weight:600;color:var(–text-2);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;display:block;}
-.modal-input{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(–border);background:var(–input-bg);color:var(–text);font-size:15px;font-family:inherit;outline:none;margin-bottom:14px;}
-.modal-input:focus{border-color:#E53935;}
-.modal-input::placeholder{color:var(–text-3);}
-.privacy-note{font-size:11.5px;color:var(–text-3);margin-bottom:18px;line-height:1.5;}
-.modal-btns{display:flex;gap:10px;}
-.btn-submit{flex:1;padding:14px;border-radius:10px;background:#E53935;color:white;border:none;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;}
-.btn-submit:disabled{opacity:0.6;cursor:not-allowed;}
-.btn-cancel{padding:14px 20px;border-radius:10px;background:var(–video-bg);color:var(–text-2);border:1px solid var(–border);font-size:15px;font-family:inherit;cursor:pointer;}
-#settings-screen{background:var(–bg);}
-.settings-header{width:100%;max-width:800px;padding:52px 24px 20px;}
-.settings-header h2{font-size:22px;font-weight:700;letter-spacing:-0.5px;}
-.settings-header p{font-size:13px;color:var(–text-2);margin-top:4px;}
-.setting-card{background:var(–card);border:1px solid var(–border);border-radius:var(–radius);padding:18px 20px;width:calc(100% - 48px);max-width:800px;margin:0 24px 12px;}
-.setting-card label{font-size:12px;font-weight:600;color:var(–text-2);text-transform:uppercase;letter-spacing:0.6px;display:block;margin-bottom:10px;}
-.setting-card input{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(–border);background:var(–input-bg);color:var(–text);font-size:15px;font-family:inherit;outline:none;}
-.setting-note{font-size:11.5px;color:var(–text-3);margin-top:8px;line-height:1.5;}
-.btn-save{width:calc(100% - 48px);max-width:800px;margin:4px 24px;padding:14px;border-radius:10px;background:#E53935;color:white;border:none;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;}
-.btn-back{width:calc(100% - 48px);max-width:800px;margin:8px 24px 32px;padding:14px;border-radius:10px;background:var(–card);color:var(–text);border:1px solid var(–border);font-size:15px;font-family:inherit;cursor:pointer;}
+  #player-screen{background:#000;width:100%;}
+  .player-top{background:#1A1008;padding:14px 20px;width:100%;}
+  .player-instruction{font-size:13px;color:#aaa;margin-bottom:12px;line-height:1.5;}
+  .btn-lock{width:100%;padding:14px;border-radius:10px;background:var(--red);border:none;color:white;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .player-wrap{position:relative;width:100%;background:#000;}
+  #yt-iframe{display:block;width:100%;aspect-ratio:16/9;border:none;}
+  .player-overlay{display:none;position:absolute;top:0;left:0;width:100%;height:100%;z-index:10;}
+  .tap-to-play{position:absolute;top:0;left:0;width:100%;height:100%;z-index:20;background:rgba(0,0,0,0.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;cursor:pointer;}
+  .play-circle{width:76px;height:76px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+  .play-circle svg{width:28px;height:28px;fill:white;margin-left:4px;}
+  .tap-to-play p{font-size:15px;color:rgba(255,255,255,0.75);font-weight:500;}
+  .lock-toast{position:absolute;top:16px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.85);color:white;font-size:15px;font-weight:700;padding:10px 20px;border-radius:20px;z-index:15;white-space:nowrap;transition:opacity 0.3s;border:1px solid rgba(255,255,255,0.15);}
+  .lock-toast.hidden{opacity:0;pointer-events:none;}
+  .player-bottom{background:#1A1008;padding:14px 20px;width:100%;display:none;}
+  .next-title{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;margin-bottom:10px;}
+  .next-videos{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+  .next-video-btn{background:#2A1A0A;border:1px solid #3A2A1A;color:white;border-radius:10px;padding:12px 14px;text-align:left;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:10px;width:100%;}
+  .next-play-icon{width:28px;height:28px;background:var(--red);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .next-play-icon svg{width:12px;height:12px;fill:white;}
+  .next-video-title{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .next-video-sub{font-size:11px;color:#888;margin-top:2px;}
+  .btn-close{width:100%;padding:14px;border-radius:10px;background:#2A1A0A;border:1px solid #3A2A1A;color:#aaa;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .btn-close svg{width:14px;height:14px;fill:#666;}
+  #pin-overlay{display:none;position:fixed;inset:0;background:rgba(10,8,4,0.94);z-index:100;flex-direction:column;align-items:center;justify-content:center;gap:18px;}
+  .pin-icon{width:52px;height:52px;background:#2A1A0A;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;}
+  .pin-icon svg{width:22px;height:22px;fill:#94A3B8;}
+  #pin-overlay h2{font-size:18px;font-weight:600;color:white;}
+  #pin-overlay p{font-size:13px;color:#94A3B8;margin-top:-8px;}
+  .pin-dots{display:flex;gap:12px;margin:4px 0;}
+  .dot{width:14px;height:14px;border-radius:50%;background:#2A1A0A;transition:background 0.12s,transform 0.12s;}
+  .dot.filled{background:var(--red);transform:scale(1.1);}
+  .pin-error{font-size:12.5px;color:#F87171;height:16px;}
+  .pin-grid{display:grid;grid-template-columns:repeat(3,72px);gap:10px;}
+  .pin-btn{height:72px;border-radius:12px;background:#2A1A0A;border:1px solid #3A2A1A;color:white;font-size:22px;font-weight:500;font-family:inherit;cursor:pointer;}
+  .pin-btn:active{background:#3A2A1A;}
+  .pin-hint{font-size:11px;color:#4B5563;margin-top:4px;}
+  .pin-forgot{font-size:12px;color:var(--red);background:none;border:none;cursor:pointer;font-family:inherit;margin-top:2px;text-decoration:underline;}
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,8,4,0.87);z-index:200;align-items:flex-end;justify-content:center;}
+  .modal-box{background:var(--bg);border:1px solid var(--border);border-radius:20px 20px 0 0;padding:28px 24px 40px;width:100%;max-width:560px;}
+  .modal-title{font-size:17px;font-weight:700;margin-bottom:4px;color:var(--text);}
+  .modal-sub{font-size:13px;color:var(--text-2);margin-bottom:20px;line-height:1.5;}
+  .modal-label{font-size:12px;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;display:block;}
+  .modal-input{width:100%;padding:13px 14px;border-radius:10px;border:1.5px solid var(--border);background:var(--input-bg);color:var(--text);font-size:15px;font-family:inherit;outline:none;margin-bottom:14px;}
+  .modal-input:focus{border-color:var(--red);}
+  .modal-input::placeholder{color:var(--text-3);}
+  .privacy-note{font-size:11.5px;color:var(--text-3);margin-bottom:18px;line-height:1.5;}
+  .modal-btns{display:flex;gap:10px;}
+  .btn-submit{flex:1;padding:14px;border-radius:10px;background:var(--red);color:white;border:none;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;}
+  .btn-submit:disabled{opacity:0.6;cursor:not-allowed;}
+  .btn-cancel{padding:14px 20px;border-radius:10px;background:var(--card);color:var(--text-2);border:1px solid var(--border);font-size:15px;font-family:inherit;cursor:pointer;}
+  #settings-screen{background:var(--bg);}
+  .settings-header{width:100%;max-width:800px;padding:52px 24px 20px;}
+  .settings-header h2{font-size:22px;font-weight:700;letter-spacing:-0.5px;}
+  .settings-header p{font-size:13px;color:var(--text-2);margin-top:4px;}
+  .setting-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;width:calc(100% - 48px);max-width:800px;margin:0 24px 12px;}
+  .setting-card label{font-size:12px;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:0.6px;display:block;margin-bottom:10px;}
+  .setting-card input{width:100%;padding:13px 14px;border-radius:10px;border:1.5px solid var(--border);background:var(--input-bg);color:var(--text);font-size:15px;font-family:inherit;outline:none;}
+  .setting-note{font-size:11.5px;color:var(--text-3);margin-top:8px;line-height:1.5;}
+  .btn-save{width:calc(100% - 48px);max-width:800px;margin:4px 24px;padding:14px;border-radius:10px;background:var(--red);color:white;border:none;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;}
+  .btn-back{width:calc(100% - 48px);max-width:800px;margin:8px 24px 32px;padding:14px;border-radius:10px;background:var(--card);color:var(--text);border:1px solid var(--border);font-size:15px;font-family:inherit;cursor:pointer;}
 </style>
-
 </head>
 <body>
 
 <div id="home" class="screen">
-  <!-- ── Full-width top bar ── -->
   <div class="header">
     <div class="header-top">
       <div class="brand" id="logo">
@@ -275,7 +272,7 @@
     <a href="https://ko-fi.com/earlytube" target="_blank">💛 If this helped your child, support EarlyTube on Ko-fi</a>
   </div>
 
-  <div class="home-footer" style="width:100%;max-width:860px;padding:0 24px 32px;text-align:center;font-size:11px;color:var(--text-3);">
+  <div style="width:100%;max-width:800px;padding:0 24px 32px;text-align:center;font-size:11px;color:var(--text-3);">
     <a href="about.html" target="_blank" style="color:var(--text-3);text-decoration:none;">Our story</a> &nbsp;·&nbsp;
     <a href="faq.html" target="_blank" style="color:var(--text-3);text-decoration:none;">FAQ</a> &nbsp;·&nbsp;
     <a href="contact.html" target="_blank" style="color:var(--text-3);text-decoration:none;">Contact</a> &nbsp;·&nbsp;
@@ -326,15 +323,13 @@
     <button class="pin-btn" onclick="pinPress('7')">7</button>
     <button class="pin-btn" onclick="pinPress('8')">8</button>
     <button class="pin-btn" onclick="pinPress('9')">9</button>
-    <button class="pin-btn" onclick="pinClear()" style="font-size:18px;color:#9CA3AF">⌫</button>
+    <button class="pin-btn" onclick="pinClear()" style="font-size:18px;color:#94A3B8">⌫</button>
     <button class="pin-btn" onclick="pinPress('0')">0</button>
-    <button class="pin-btn" onclick="pinCancel()" style="font-size:12px;color:#9CA3AF">Cancel</button>
+    <button class="pin-btn" onclick="pinCancel()" style="font-size:12px;color:#94A3B8">Cancel</button>
   </div>
   <div class="pin-hint">Default PIN is 1234 · Change in Settings</div>
   <button class="pin-forgot" onclick="forgotPin()">Forgot PIN?</button>
 </div>
-
-<!-- ADD VIDEO MODAL: no title field — fetched automatically from YouTube -->
 
 <div id="add-video-modal" class="modal-overlay">
   <div class="modal-box">
@@ -471,10 +466,7 @@ function loadUserProfile(user){
   db.collection('users').doc(user.uid).get().then(function(doc){
     if(doc.exists){
       var data=doc.data();
-      if(data.pin){
-        parentPin=data.pin;
-        localStorage.setItem('et_pin',data.pin);
-      }
+      if(data.pin){parentPin=data.pin;localStorage.setItem('et_pin',data.pin);}
       if(data.sheetId){
         userSheetUrl=data.sheetUrl;
         var token=localStorage.getItem('et_gtoken');
@@ -580,10 +572,6 @@ function createFreshSetup(token,user){
   });
 }
 
-// ── LOAD PERSONAL VIDEOS ─────────────────────────────────────────────────────
-// Accepts full YouTube URLs or bare IDs in column C.
-// Rows with no title in column A get their title fetched via oEmbed,
-// then written back to the sheet so it's cached for next load.
 function loadPersonalVideos(sheetId,token){
   if(!token)token=localStorage.getItem('et_gtoken');
   if(!token||!sheetId)return;
@@ -633,8 +621,6 @@ function loadPersonalVideos(sheetId,token){
   });
 }
 
-// Fetch oEmbed titles for rows that had an empty title column,
-// update the UI immediately, then write the titles back to the sheet.
 function fetchMissingTitles(sheetId,token,items){
   var promises=items.map(function(item){
     return fetch('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v='+item.id+'&format=json')
@@ -648,9 +634,7 @@ function fetchMissingTitles(sheetId,token,items){
       if(!item.title)return;
       var vids=personalVideosData[item.cat]||[];
       for(var i=0;i<vids.length;i++){
-        if(vids[i].id===item.id&&!vids[i].title){
-          vids[i].title=item.title;updated=true;break;
-        }
+        if(vids[i].id===item.id&&!vids[i].title){vids[i].title=item.title;updated=true;break;}
       }
     });
     if(updated)renderPersonalCategory();
@@ -661,9 +645,7 @@ function fetchMissingTitles(sheetId,token,items){
       headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},
       body:JSON.stringify({
         valueInputOption:'RAW',
-        data:toWrite.map(function(item){
-          return{range:'Videos!A'+item.sheetRow,values:[[item.title]]};
-        })
+        data:toWrite.map(function(item){return{range:'Videos!A'+item.sheetRow,values:[[item.title]]};})
       })
     }).catch(function(e){console.error('Title backfill error',e);});
   });
@@ -693,8 +675,6 @@ function closeAddVideoModal(){
   btn.textContent='Save video';btn.disabled=false;
 }
 
-// ── SAVE PERSONAL VIDEO ───────────────────────────────────────────────────────
-// No title input — fetched automatically via YouTube oEmbed (no API key needed)
 function savePersonalVideo(){
   var url=document.getElementById('add-url').value.trim();
   var category=document.getElementById('add-category').value.trim()||'My Videos';
@@ -705,24 +685,16 @@ function savePersonalVideo(){
   var btn=document.getElementById('add-video-submit');
   btn.textContent='Fetching title…';btn.disabled=true;
   fetch('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v='+id+'&format=json')
-    .then(function(r){
-      if(!r.ok)throw new Error('oEmbed failed');
-      return r.json();
-    })
-    .then(function(data){
-      return writeVideoToSheet(id,data.title||'Untitled',category,token);
-    })
-    .catch(function(){
-      return writeVideoToSheet(id,'Video '+id,category,token);
-    });
+    .then(function(r){if(!r.ok)throw new Error('oEmbed failed');return r.json();})
+    .then(function(data){return writeVideoToSheet(id,data.title||'Untitled',category,token);})
+    .catch(function(){return writeVideoToSheet(id,'Video '+id,category,token);});
 }
 
 function writeVideoToSheet(id,title,category,token){
   return db.collection('users').doc(currentUser.uid).get().then(function(doc){
     if(!doc.exists||!doc.data().sheetId){
       alert('Sheet not found. Please sign out and sign in again.');
-      closeAddVideoModal();
-      return;
+      closeAddVideoModal();return;
     }
     var sheetId=doc.data().sheetId;
     return fetch('https://sheets.googleapis.com/v4/spreadsheets/'+sheetId+'/values/Videos!A:F:append?valueInputOption=RAW',{
@@ -831,7 +803,6 @@ function prepareVideo(id){
   document.getElementById('player-top').style.display='block';
   document.getElementById('player-bottom').style.display='none';
   document.getElementById('lock-toast').classList.add('hidden');
-  // Restore next-video section visibility (hidden when locked)
   document.getElementById('next-videos').style.display='';
   document.querySelector('.next-title').style.display='';
   buildNextVideos(id);
@@ -845,7 +816,6 @@ function lockControls(){
   document.getElementById('player-overlay').style.display='block';
   document.getElementById('player-top').style.display='none';
   document.getElementById('player-bottom').style.display='block';
-  // Hide next-video buttons when locked — child cannot stim by switching videos
   document.getElementById('next-videos').style.display='none';
   document.querySelector('.next-title').style.display='none';
   var toast=document.getElementById('lock-toast');
@@ -855,14 +825,10 @@ function lockControls(){
 function buildNextVideos(currentId){
   var f=[];
   if(currentUser){
-    // Signed in — only use personal videos, never fall back to curated
     Object.keys(personalVideosData).forEach(function(cat){
-      personalVideosData[cat].forEach(function(v){
-        if(v.id!==currentId)f.push(v);
-      });
+      personalVideosData[cat].forEach(function(v){if(v.id!==currentId)f.push(v);});
     });
   } else {
-    // Not signed in — use curated list
     var age=document.getElementById('age-select').value;
     f=allVideos.filter(function(v){return(v.age||'').toLowerCase()===age&&v.id!==currentId;});
     if(!f.length)f=(FALLBACK[age]||[]).filter(function(v){return v.id!==currentId;});
@@ -874,7 +840,7 @@ function buildNextVideos(currentId){
       +'<div><div class="next-video-title">'+escHtml(v.title)+'</div>'
       +'<div class="next-video-sub">'+escHtml(v.channel||'')+'</div></div></button>';
   });
-  document.getElementById('next-videos').innerHTML=html||'<div style="font-size:12px;color:#666;">No more videos.</div>';
+  document.getElementById('next-videos').innerHTML=html||'<div style="font-size:12px;color:#888;">No more videos.</div>';
 }
 function closeVideo(){
   document.getElementById('yt-iframe').src='';
@@ -899,34 +865,22 @@ function checkPin(){
     if(pinAction==='settings')show('settings-screen');
   }else{document.getElementById('pin-error').textContent='Incorrect PIN — try again';pinBuffer='';updateDots();}
 }
-
 function saveSettings(){
   var np=document.getElementById('new-pin').value.trim();
   if(!/^\d{4}$/.test(np)){alert('Please enter exactly 4 digits.');return;}
-  parentPin=np;
-  localStorage.setItem('et_pin',np);
-  if(currentUser){
-    db.collection('users').doc(currentUser.uid).set({pin:np},{merge:true});
-  }
-  alert('PIN updated!');
-  showHome();
+  parentPin=np;localStorage.setItem('et_pin',np);
+  if(currentUser){db.collection('users').doc(currentUser.uid).set({pin:np},{merge:true});}
+  alert('PIN updated!');showHome();
 }
-
 function forgotPin(){
-  if(!currentUser){
-    alert('Please sign in first, then use Forgot PIN.');
-    return;
-  }
+  if(!currentUser){alert('Please sign in first, then use Forgot PIN.');return;}
   var p=new firebase.auth.GoogleAuthProvider();
   auth.signInWithPopup(p).then(function(){
-    parentPin='1234';
-    localStorage.setItem('et_pin','1234');
+    parentPin='1234';localStorage.setItem('et_pin','1234');
     db.collection('users').doc(currentUser.uid).set({pin:'1234'},{merge:true});
     document.getElementById('pin-overlay').style.display='none';
     alert('PIN has been reset to 1234. Please change it in Settings.');
-  }).catch(function(){
-    alert('Could not verify your identity. Please try again.');
-  });
+  }).catch(function(){alert('Could not verify your identity. Please try again.');});
 }
 
 var logoTimer;
@@ -947,9 +901,7 @@ window.addEventListener('popstate',function(){
 loadVideos();
 
 if('serviceWorker' in navigator){
-  window.addEventListener('load',function(){
-    navigator.serviceWorker.register('/sw.js');
-  });
+  window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js');});
 }
 </script>
 
