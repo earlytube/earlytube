@@ -400,11 +400,9 @@ provider.addScope('https://www.googleapis.com/auth/spreadsheets');
 function signIn(){
   auth.signInWithPopup(provider).then(function(result){
     if(result&&result.credential){
-      var token=result.credential.accessToken;
-      localStorage.setItem('et_gtoken',token);
-      currentUser=result.user;
-      updateAuthUI(result.user);
-      setupUserProfile(result.user,token);
+      // Just store the token — onAuthStateChanged handles the rest,
+      // avoiding a double-call race that creates duplicate sheets.
+      localStorage.setItem('et_gtoken',result.credential.accessToken);
     }
   }).catch(function(e){
     console.error('Sign in error',e);
@@ -493,15 +491,27 @@ function setupUserProfile(user,token){
       }).then(function(r){return r.json();})
       .then(function(data){
         if(data.error){
-          db.collection('users').doc(user.uid).update({
-            sheetId:firebase.firestore.FieldValue.delete(),
-            sheetUrl:firebase.firestore.FieldValue.delete()
-          }).then(function(){createAndSaveSheet(user,token);});
+          if(data.error.code===404){
+            // Sheet was genuinely deleted — safe to recreate
+            db.collection('users').doc(user.uid).update({
+              sheetId:firebase.firestore.FieldValue.delete(),
+              sheetUrl:firebase.firestore.FieldValue.delete()
+            }).then(function(){createAndSaveSheet(user,token);});
+          } else {
+            // 401/403 = token expired or permission issue — never recreate,
+            // just show the existing no-videos state
+            userSheetUrl=doc.data().sheetUrl;
+            showNoVideosState(userSheetUrl);
+          }
         } else {
           userSheetUrl=doc.data().sheetUrl;
           loadPersonalVideos(doc.data().sheetId,token);
         }
-      }).catch(function(){createAndSaveSheet(user,token);});
+      }).catch(function(){
+        // Network error — show existing state, don't recreate
+        userSheetUrl=doc.data().sheetUrl;
+        showNoVideosState(userSheetUrl);
+      });
     } else {
       createAndSaveSheet(user,token);
     }
