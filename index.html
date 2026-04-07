@@ -96,8 +96,8 @@
   .btn-add-video{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--red);background:var(--red-light);border:1px solid var(--red);border-radius:8px;padding:6px 12px;cursor:pointer;font-family:inherit;font-weight:600;}
   .video-list{display:flex;flex-direction:column;gap:10px;}
   .video-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;background:var(--video-card-bg);border:1px solid var(--video-card-border);border-radius:var(--video-card-radius);}
-  .video-thumb{width:42px;height:42px;border-radius:12px;background:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;}
-  .video-thumb svg{width:16px;height:16px;fill:white;}
+  .video-thumb{width:96px;height:54px;border-radius:8px;background:var(--card);overflow:hidden;flex-shrink:0;cursor:pointer;}
+  .video-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
   .video-info{flex:1;min-width:0;cursor:pointer;}
   .video-title{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text);}
   .video-sub{font-size:12px;color:var(--text-3);margin-top:2px;}
@@ -668,8 +668,7 @@ function renderPersonalCategory(){
   var html='';
   videos.forEach(function(v){
     html+='<div class="video-item">'
-      +'<div class="video-thumb" onclick="prepareVideo(\''+escAttr(v.id)+'\')">'
-      +'<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>'
+      +'<div class="video-thumb" onclick="prepareVideo(\''+escAttr(v.id)+'\')"><img src="https://img.youtube.com/vi/'+escAttr(v.id)+'/mqdefault.jpg" alt="" loading="lazy"/></div>'
       +'<div class="video-info" onclick="prepareVideo(\''+escAttr(v.id)+'\')">'
       +'<div class="video-title">'+escHtml(v.title)+'</div>'
       +'</div></div>';
@@ -759,7 +758,7 @@ function renderVideos(){
   else{f.forEach(function(v){
     html+='<div class="video-item">'
       +'<div class="video-thumb" onclick="prepareVideo(\''+v.id+'\')">'
-      +'<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>'
+      +'<img src="https://img.youtube.com/vi/'+v.id+'/mqdefault.jpg" alt="" loading="lazy"/></div>'
       +'<div class="video-info" onclick="prepareVideo(\''+v.id+'\')">'
       +'<div class="video-title">'+escHtml(v.title)+'</div>'
       +'<div class="video-sub">'+escHtml(v.channel||'')+'</div>'
