@@ -257,7 +257,7 @@ body{background:var(–bg);color:var(–text);font-family:‘Inter’,-apple-sys
   </div>
 
   <div class="info-card">
-    <p><strong>For parents:</strong> Select your child's age above to see suitable videos. Videos play with no controls visible — your child cannot rewind, skip, or scrub. Closing always requires the parent PIN. <strong>Default PIN is 1234.</strong> Long press logo to open Settings and change PIN.</p>
+    <p id="info-card-text"><strong>For parents:</strong> Select your child's age above to see suitable videos. Videos play with no controls visible — your child cannot rewind, skip, or scrub. Closing always requires the parent PIN. <strong>Default PIN is 1234.</strong> Long press logo to open Settings and change PIN.</p>
   </div>
 
   <div class="kofi-bar">
@@ -421,6 +421,9 @@ function updateAuthUI(user){
     else{av.textContent=user.displayName?user.displayName[0].toUpperCase():'U';}
     document.getElementById('auth-name').textContent=user.displayName?user.displayName.split(' ')[0]:user.email;
     document.getElementById('pin-storage-note').textContent='You\'re signed in — your PIN is saved to your account and will never reset.';
+    document.getElementById('info-card-text').innerHTML='<strong>For parents:</strong> Closing always requires the parent PIN. <strong>Default PIN is 1234.</strong> Long press logo to open Settings and change PIN. Forgot your PIN? <a href="#" onclick="forgotPin();return false;" style="color:var(--red);font-weight:600;">Reset to 1234</a>.';
+  } else {
+    document.getElementById('info-card-text').innerHTML='<strong>For parents:</strong> Select your child\'s age above to see suitable videos. Videos play with no controls visible — your child cannot rewind, skip, or scrub. Closing always requires the parent PIN. <strong>Default PIN is 1234.</strong> Long press logo to open Settings and change PIN.';
   } else {
     document.getElementById('auth-signed-out').style.display='flex';
     document.getElementById('auth-signed-in').style.display='none';
