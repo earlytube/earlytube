@@ -4,10 +4,12 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <title>FAQ – EarlyTube</title>
 <meta name="description" content="Answers to common questions about EarlyTube."/>
 <link rel="apple-touch-icon" href="icon.png"/>
 <link rel="icon" type="image/png" href="icon.png"/>
+<link rel="stylesheet" href="theme.css"/>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2DFE2R37G1"></script>
 <script>
   window.dataLayer=window.dataLayer||[];
@@ -16,51 +18,53 @@
   gtag('config','G-2DFE2R37G1');
 </script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-  :root{
-    --red:#E53935;--red-light:#FFEBEE;
-    --bg:#F7F8FA;--card:#FFFFFF;--border:#E8EAF0;
-    --text:#1A1D23;--text-2:#6B7280;--text-3:#9CA3AF;
-    --radius:14px;
-  }
-  @media(prefers-color-scheme:dark){
-    :root{
-      --bg:#0F0F11;--card:#1C1C1E;--border:#2C2C2E;
-      --text:#F2F2F7;--text-2:#9CA3AF;--text-3:#6B7280;
-      --red-light:#2C1A1A;
-    }
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;line-height:1.7;}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;max-width:680px;margin:0 auto;}
-.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(–text);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(––bg);color:var(––text);font-family:‘Inter’,-apple-system,sans-serif;line-height:1.7;}
+
+/* ── NAV ── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;width:100%;border-bottom:1px solid var(––border);position:sticky;top:0;background:var(––bg);z-index:10;}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(––text);}
 .nav-name{font-size:17px;font-weight:700;}
-.nav-link{font-size:14px;color:var(–red);font-weight:600;text-decoration:none;background:var(–red-light);padding:8px 16px;border-radius:20px;}
+.nav-link{font-size:13px;color:var(––red);font-weight:600;text-decoration:none;background:var(––red-light);padding:7px 14px;border-radius:20px;}
 
-.hero{max-width:680px;margin:0 auto;padding:32px 24px 24px;}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;background:var(–red-light);color:var(–red);font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:20px;text-transform:uppercase;letter-spacing:0.5px;}
-.hero h1{font-size:clamp(28px,5vw,42px);font-weight:800;letter-spacing:-1px;line-height:1.15;margin-bottom:10px;}
-.hero p{font-size:15px;color:var(–text-2);line-height:1.7;}
+/* ── CONTENT WRAPPER — responsive padding ── */
+.page{width:100%;padding:0 14px;}
+@media(min-width:640px){.page{padding:0 20px;}}
+@media(min-width:1024px){.page{padding:0 28px;}}
 
-.content{max-width:680px;margin:0 auto;padding:4px 24px 60px;}
+/* ── HERO ── */
+.hero{padding:28px 0 20px;max-width:860px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;background:var(––red-light);color:var(––red);font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:16px;text-transform:uppercase;letter-spacing:0.5px;}
+.hero h1{font-size:clamp(26px,5vw,42px);font-weight:800;letter-spacing:-1px;line-height:1.15;margin-bottom:10px;}
+.hero p{font-size:15px;color:var(––text-2);line-height:1.7;}
 
-.faq-group{margin-bottom:28px;}
-.faq-group-title{font-size:11px;font-weight:700;color:var(–text-3);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;padding-left:2px;}
+/* ── FAQ GRID — 1 col mobile, 2 col tablet+ ── */
+.faq-grid{
+display:grid;
+grid-template-columns:1fr;
+gap:24px;
+padding:8px 0 60px;
+max-width:1200px;
+}
+@media(min-width:760px){.faq-grid{grid-template-columns:1fr 1fr;}}
 
-.faq-item{background:var(–card);border:1px solid var(–border);border-radius:var(–radius);margin-bottom:8px;overflow:hidden;}
-.faq-q{width:100%;text-align:left;background:none;border:none;padding:18px 20px;font-size:15px;font-weight:600;color:var(–text);font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;line-height:1.4;}
+.faq-group-title{font-size:11px;font-weight:700;color:var(––text-3);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;padding-left:2px;}
+
+.faq-item{background:var(––card);border:1px solid var(––border);border-radius:var(––radius);margin-bottom:8px;overflow:hidden;}
+.faq-q{width:100%;text-align:left;background:none;border:none;padding:16px 18px;font-size:14px;font-weight:600;color:var(––text);font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;line-height:1.4;}
 .faq-q:active{opacity:0.8;}
-.faq-arrow{font-size:18px;color:var(–text-3);flex-shrink:0;transition:transform 0.2s;}
+.faq-arrow{font-size:16px;color:var(––text-3);flex-shrink:0;transition:transform 0.2s;}
 .faq-item.open .faq-arrow{transform:rotate(180deg);}
-.faq-a{display:none;padding:0 20px 18px;font-size:14px;color:var(–text-2);line-height:1.75;}
+.faq-a{display:none;padding:0 18px 16px;font-size:13px;color:var(––text-2);line-height:1.75;}
 .faq-item.open .faq-a{display:block;}
-.faq-a a{color:var(–red);text-decoration:none;font-weight:500;}
+.faq-a a{color:var(––red);text-decoration:none;font-weight:500;}
 .faq-a a:hover{text-decoration:underline;}
-.faq-a strong{color:var(–text);font-weight:600;}
+.faq-a strong{color:var(––text);font-weight:600;}
 
-footer{border-top:1px solid var(–border);padding:24px;text-align:center;font-size:12px;color:var(–text-3);}
-footer a{color:var(–red);text-decoration:none;}
+footer{border-top:1px solid var(––border);padding:20px 16px;text-align:center;font-size:12px;color:var(––text-3);}
+footer a{color:var(––red);text-decoration:none;}
 </style>
 
 </head>
@@ -68,141 +72,105 @@ footer a{color:var(–red);text-decoration:none;}
 
 <nav>
   <a class="nav-brand" href="index.html">
-    <img src="icon.png" style="width:36px;height:36px;border-radius:9px;flex-shrink:0;"/>
+    <img src="icon.png" style="width:32px;height:32px;border-radius:8px;flex-shrink:0;"/>
     <span class="nav-name">EarlyTube</span>
   </a>
-  <a class="nav-link" href="index.html">Open app →</a>
+  <a class="nav-link" href="index.html">Open app</a>
 </nav>
 
-<div class="hero">
-  <div class="hero-eyebrow">FAQ</div>
-  <h1>Questions we get asked.</h1>
-  <p>If something isn't answered here, reach us at <a href="mailto:earlytubeapp@gmail.com" style="color:var(--red);font-weight:500;">earlytubeapp@gmail.com</a>.</p>
-</div>
-
-<div class="content">
-
-  <div class="faq-group">
-    <div class="faq-group-title">The basics</div>
-
-```
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">What is EarlyTube? <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">EarlyTube is a free web app that lets young children watch YouTube videos without any player controls — no rewind, no skip, no progress bar. A parent sets it up, locks it with a PIN, and hands it to the child. The video just plays forward. That's it.</div>
-</div>
-
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">Why does this exist? <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">It was built by a mom of a teenager on the autism spectrum. The rewind button became a loop he couldn't escape — the same second of video, repeated for hours. That behaviour is called stimming, and for some children it's reinforced by the very design of YouTube's player. EarlyTube removes the controls entirely, before the habit can form. You can read the full story on our <a href="about.html">about page</a>.</div>
-</div>
-
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">Is it really free? <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">Right now, yes — completely free to use. No ads, no paywalls, no hidden fees. As a pilot, we're absorbing the infrastructure costs ourselves to make sure it's accessible to every parent who needs it.<br/><br/>Honestly though, keeping it running does cost money — hosting, databases, the tools that make it work. We're still figuring out what that looks like long term. What we can promise is that any future changes will be fair, transparent, and will never leave a parent of a child with special needs without access. If you want to help keep it free for others, there's a voluntary <a href="https://ko-fi.com/earlytube" target="_blank">Ko-fi link</a> — no pressure at all.</div>
-</div>
-
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">Do I need to download anything? <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">No download needed. EarlyTube runs in any browser. On iPhone you can tap <strong>Share → Add to Home Screen</strong> to install it like an app. On Android, Chrome will prompt you to install it automatically.</div>
-</div>
-```
-
+<div class="page">
+  <div class="hero">
+    <div class="hero-eyebrow">FAQ</div>
+    <h1>Questions we get asked.</h1>
+    <p>If something isn't answered here, reach us at <a href="mailto:earlytubeapp@gmail.com" style="color:var(--red);font-weight:500;">earlytubeapp@gmail.com</a>.</p>
   </div>
 
-  <div class="faq-group">
-    <div class="faq-group-title">The parent PIN</div>
+  <div class="faq-grid">
 
 ```
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">What is the default PIN? <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">The default PIN is <strong>1234</strong>. You should change it before giving the device to your child. Long press the EarlyTube logo on the home screen to open Settings, where you can set a new PIN.</div>
-</div>
-
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">My PIN keeps resetting. Why? <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">If you're not signed in, the PIN is stored in your browser's local storage. On iPhone, Safari can clear this after a period of inactivity due to Apple's privacy settings. The fix is to <strong>sign in with Google</strong> — your PIN is then saved to your account and will never reset, even if you switch devices or browsers.</div>
-</div>
-
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">I forgot my PIN. What do I do? <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">On the PIN entry screen, tap <strong>Forgot PIN?</strong> You'll be asked to verify your Google account, and your PIN will be reset to 1234. You can then set a new one in Settings. If you're not signed in, the PIN resets automatically to 1234 after a period of inactivity — so you can just wait, or clear your browser's site data for EarlyTube.</div>
-</div>
-
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">Can my child get past the PIN? <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">EarlyTube is designed for young children who don't know what a PIN is. Older children may figure out workarounds — they could close the browser tab, for example. It's not a security product, it's a habit prevention tool. It works best when used proactively, before a child learns to look for workarounds.</div>
-</div>
-```
-
+<!-- Column / group 1 -->
+<div>
+  <div class="faq-group-title">The basics</div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">What is EarlyTube? <span class="faq-arrow">&#8595;</span></button>
+    <div class="faq-a">EarlyTube is a free web app that lets young children watch YouTube videos without any player controls — no rewind, no skip, no progress bar. A parent sets it up, locks it with a PIN, and hands it to the child. The video just plays forward. That's it.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Why does this exist? <span class="faq-arrow">&#8595;</span></button>
+    <div class="faq-a">It was built by a mom of a teenager on the autism spectrum. The rewind button became a loop he couldn't escape — the same second of video, repeated for hours. That behaviour is called stimming, and for some children it's reinforced by the very design of YouTube's player. EarlyTube removes the controls entirely, before the habit can form. You can read the full story on our <a href="about.html">about page</a>.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Is it really free? <span class="faq-arrow">&#8595;</span></button>
+    <div class="faq-a">Right now, yes — completely free to use. No ads, no paywalls, no hidden fees. If you want to help keep it free for others, there's a voluntary <a href="https://ko-fi.com/earlytube" target="_blank">Ko-fi link</a> — no pressure at all.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Do I need to download anything? <span class="faq-arrow">&#8595;</span></button>
+    <div class="faq-a">No download needed. EarlyTube runs in any browser. On iPhone you can tap <strong>Share → Add to Home Screen</strong> to install it like an app. On Android, Chrome will prompt you to install it automatically.</div>
   </div>
 
-  <div class="faq-group">
-    <div class="faq-group-title">Watching videos</div>
-
-```
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">How do I play a video? <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">Either tap a video from the suggested list, or paste a YouTube link into the box. The video loads in a player. Tap play, then tap <strong>Lock the controls</strong>. An invisible overlay covers the player — your child can't interact with any controls. When you want to stop, tap <strong>Close</strong> and enter your PIN.</div>
+  <div class="faq-group-title" style="margin-top:24px;">Sign-in & account</div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Do I need to sign in? <span class="faq-arrow">&#8595;</span></button>
+    <div class="faq-a">No. The core app — curated videos, paste-a-link, PIN lock — works without any account. Sign-in is only needed if you want to save your own personal video list, or if you want your PIN to persist permanently across sessions.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">What does signing in actually do? <span class="faq-arrow">&#8595;</span></button>
+    <div class="faq-a">It creates a Google Sheet in your Google Drive called "EarlyTube" where your personal video list is stored. It also saves your PIN to your account so it never resets. Your name and email are stored in our database only to identify your account — nothing else.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Sign-in isn't working on my iPhone. <span class="faq-arrow">&#8595;</span></button>
+    <div class="faq-a">Make sure pop-ups are allowed for EarlyTube in your Safari settings. Go to <strong>Settings → Safari → Block Pop-ups</strong> and turn it off, or add EarlyTube as an exception. If the problem persists, try using Chrome on iPhone instead.</div>
+  </div>
 </div>
 
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">Can I add my own videos? <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">Yes. Sign in with Google and you'll see a personal video list section. Tap <strong>+ Add</strong> to paste a YouTube link, give it a title, and optionally assign it to a category. Your list is saved to a Google Sheet in your own Google Drive — you can manage it there too.</div>
-</div>
-
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">Why does the video need controls on iPhone before locking? <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">Apple's iOS requires a user tap to start video playback — it can't be triggered automatically. So on iPhone, you see the video with a play button first. Once you tap play and then tap <strong>Lock the controls</strong>, a black strip covers the controls bar and an invisible overlay locks everything. Playback continues uninterrupted without reloading the video.</div>
-</div>
-
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">A suggested video isn't working or seems inappropriate. What do I do? <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">Tap the <strong>Suggest a fix</strong> button on that video. You can submit a replacement link and we'll update the list. You can also reach us directly at <a href="mailto:earlytubeapp@gmail.com">earlytubeapp@gmail.com</a>.</div>
-</div>
-```
-
+<!-- Column / group 2 -->
+<div>
+  <div class="faq-group-title">The parent PIN</div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">What is the default PIN? <span class="faq-arrow">&#8595;</span></button>
+    <div class="faq-a">The default PIN is <strong>1234</strong>. You should change it before giving the device to your child. Long press the EarlyTube logo on the home screen to open Settings, where you can set a new PIN.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">My PIN keeps resetting. Why? <span class="faq-arrow">&#8595;</span></button>
+    <div class="faq-a">If you're not signed in, the PIN is stored in your browser's local storage. On iPhone, Safari can clear this after a period of inactivity. The fix is to <strong>sign in with Google</strong> — your PIN is then saved to your account and will never reset.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">I forgot my PIN. What do I do? <span class="faq-arrow">&#8595;</span></button>
+    <div class="faq-a">On the PIN entry screen, tap <strong>Forgot PIN?</strong> You'll be asked to verify your Google account, and your PIN will be reset to 1234. You can then set a new one in Settings.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Can my child get past the PIN? <span class="faq-arrow">&#8595;</span></button>
+    <div class="faq-a">EarlyTube is designed for young children who don't know what a PIN is. Older children may figure out workarounds — they could close the browser tab, for example. It's not a security product, it's a habit prevention tool.</div>
   </div>
 
-  <div class="faq-group">
-    <div class="faq-group-title">Sign-in & account</div>
-
-```
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">Do I need to sign in? <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">No. The core app — curated videos, paste-a-link, PIN lock — works without any account. Sign-in is only needed if you want to save your own personal video list, or if you want your PIN to persist permanently across sessions.</div>
-</div>
-
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">What does signing in actually do? <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">It creates a Google Sheet in your Google Drive called "EarlyTube" where your personal video list is stored. It also saves your PIN to your account so it never resets. Your name and email are stored in our database only to identify your account — nothing else.</div>
-</div>
-
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">Sign-in isn't working on my iPhone. <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">Make sure pop-ups are allowed for EarlyTube in your Safari settings. Go to <strong>Settings → Safari → Block Pop-ups</strong> and turn it off, or add EarlyTube as an exception. If the problem persists, try using Chrome on iPhone instead.</div>
-</div>
-```
-
+  <div class="faq-group-title" style="margin-top:24px;">Watching videos</div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">How do I play a video? <span class="faq-arrow">&#8595;</span></button>
+    <div class="faq-a">Either tap a video from the suggested list, or paste a YouTube link into the box. The video loads in a player. Tap play, then tap <strong>Lock the controls</strong>. An invisible overlay covers the player — your child can't interact with any controls.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Can I add my own videos? <span class="faq-arrow">&#8595;</span></button>
+    <div class="faq-a">Yes. Sign in with Google and you'll see a personal video list section. Tap <strong>+ Add</strong> to paste a YouTube link. Your list is saved to a Google Sheet in your own Google Drive.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">A suggested video isn't working. What do I do? <span class="faq-arrow">&#8595;</span></button>
+    <div class="faq-a">Tap the <strong>Suggest a fix</strong> button on that video. You can submit a replacement link and we'll update the list. You can also reach us at <a href="mailto:earlytubeapp@gmail.com">earlytubeapp@gmail.com</a>.</div>
   </div>
 
-  <div class="faq-group">
-    <div class="faq-group-title">Privacy & safety</div>
-
-```
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">Does my child's data get collected? <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">No. Children never interact with any sign-in, form, or data collection. EarlyTube is configured entirely by the parent. The child-facing experience collects nothing. See our full <a href="privacy.html">privacy policy</a>.</div>
-</div>
-
-<div class="faq-item">
-  <button class="faq-q" onclick="toggle(this)">Is EarlyTube affiliated with YouTube or Google? <span class="faq-arrow">↓</span></button>
-  <div class="faq-a">No. EarlyTube is an independent project built by a parent. It embeds YouTube videos using YouTube's standard embed player, but has no relationship with Google or YouTube.</div>
-</div>
-```
-
+  <div class="faq-group-title" style="margin-top:24px;">Privacy & safety</div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Does my child's data get collected? <span class="faq-arrow">&#8595;</span></button>
+    <div class="faq-a">No. Children never interact with any sign-in, form, or data collection. EarlyTube is configured entirely by the parent. See our full <a href="privacy.html">privacy policy</a>.</div>
   </div>
-
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">Is EarlyTube affiliated with YouTube or Google? <span class="faq-arrow">&#8595;</span></button>
+    <div class="faq-a">No. EarlyTube is an independent project built by a parent. It embeds YouTube videos using YouTube's standard embed player, but has no relationship with Google or YouTube.</div>
+  </div>
 </div>
+```
+
+  </div><!-- /.faq-grid -->
+</div><!-- /.page -->
 
 <footer>
   <a href="index.html">Open EarlyTube</a> &nbsp;·&nbsp;
