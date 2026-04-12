@@ -1199,9 +1199,10 @@ window.addEventListener('popstate',function(){
   if(player&&player.style.display==='flex'){requestClose();}
 });
 
- // Show install prompt only when running in browser, not standalone PWA
-if(window.matchMedia('(display-mode: browser)').matches){
-  var alreadyShown=sessionStorage.getItem('et_install_shown');
+var isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+
+if(!isStandalone){
+  var alreadyShown = sessionStorage.getItem('et_install_shown');
   if(!alreadyShown){
     sessionStorage.setItem('et_install_shown','1');
     document.getElementById('install-popup').style.display='flex';
