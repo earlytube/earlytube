@@ -1199,15 +1199,16 @@ window.addEventListener('popstate',function(){
   if(player&&player.style.display==='flex'){requestClose();}
 });
 
-var isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
-
-if(!isStandalone){
-  var alreadyShown = sessionStorage.getItem('et_install_shown');
-  if(!alreadyShown){
-    sessionStorage.setItem('et_install_shown','1');
-    document.getElementById('install-popup').style.display='flex';
+document.addEventListener('DOMContentLoaded',function(){
+  var isStandalone=window.navigator.standalone===true||window.matchMedia('(display-mode: standalone)').matches;
+  if(!isStandalone){
+    var alreadyShown=sessionStorage.getItem('et_install_shown');
+    if(!alreadyShown){
+      sessionStorage.setItem('et_install_shown','1');
+      document.getElementById('install-popup').style.display='flex';
+    }
   }
-}
+});
  
 loadVideos();
 
