@@ -1083,12 +1083,13 @@ function prepareVideo(id){
   document.getElementById('lock-toast').classList.add('hidden');
   document.getElementById('next-videos').style.display='';
   document.querySelector('.next-title').style.display='';
-document.getElementById('yt-iframe').src='https://www.youtube.com/embed/'+id+'?autoplay=0&controls=1&disablekb=0&fs=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1';
+  document.getElementById('yt-iframe').src='https://www.youtube.com/embed/'+id+'?autoplay=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&enablejsapi=1';
+
   buildNextVideos(id);
   show('player-screen');
 }
 
-  function lockControls(){
+function lockControls(){
   try{
     document.getElementById('yt-iframe').contentWindow.postMessage(
       JSON.stringify({event:'command',func:'playVideo',args:''}),
