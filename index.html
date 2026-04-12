@@ -342,6 +342,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sa
 </div>
 
 <div id="pin-overlay">
+  <button onclick="pinCancel()" style="position:absolute;top:20px;right:20px;background:none;border:none;color:#94A3B8;font-size:24px;cursor:pointer;line-height:1;">✕</button>
   <div class="pin-icon"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></div>
   <h2 id="pin-title">Parent PIN required</h2>
   <p id="pin-subtitle">Enter your 4-digit PIN to continue</p>
@@ -1129,8 +1130,16 @@ function requestClose(){pinAction='close';showPin('Parent PIN required','Enter y
 function requestSettings(){pinAction='settings';showPin('Parent PIN required','Enter your PIN to open Settings');}
 function showPin(title,sub){pinBuffer='';updateDots();document.getElementById('pin-error').textContent='';document.getElementById('pin-title').textContent=title;document.getElementById('pin-subtitle').textContent=sub;document.getElementById('pin-overlay').style.display='flex';}
 function pinPress(d){if(pinBuffer.length>=4)return;pinBuffer+=d;updateDots();if(pinBuffer.length===4)setTimeout(checkPin,120);}
-function pinClear(){pinBuffer=pinBuffer.slice(0,-1);updateDots();}
-function pinCancel(){document.getElementById('pin-overlay').style.display='none';pinBuffer='';}
+function pinClear(){pinBuffer=pinBuffer.slice(0,-1);updateDots();}function pinCancel(){
+  document.getElementById('pin-overlay').style.display='none';
+  pinBuffer='';
+  // If video was playing, return to it
+  var player=document.getElementById('player-screen');
+  if(player&&player.style.display==='flex'){
+    // Video stays playing — just dismiss the PIN overlay
+    return;
+  }
+}
 function updateDots(){for(var i=0;i<4;i++)document.getElementById('d'+i).className='dot'+(i<pinBuffer.length?' filled':'');}
 function checkPin(){
   if(pinBuffer===parentPin){
