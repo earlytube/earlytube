@@ -175,6 +175,8 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sa
 .tab-btn:hover:not(.active){color:var(--text-2);}
 .edu-controls{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
 .edu-select{padding:6px 10px;border-radius:8px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);font-size:13px;font-family:inherit;outline:none;cursor:pointer;}
+.btn-lock:disabled{opacity:0.4;cursor:not-allowed;}
+.btn-lock:disabled:after{content:' — tap play first';font-size:11px;font-weight:400;opacity:0.8;}
 </style>
 </head>
 <body>
@@ -323,7 +325,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sa
 <div id="player-screen" class="screen">
   <div class="player-top" id="player-top">
     <div class="player-instruction">Tap play on the video below, then tap Lock — controls disappear for your child.</div>
-    <button class="btn-lock" onclick="lockControls()">Lock the controls</button>
+    <button class="btn-lock" id="btn-lock" onclick="lockControls()" disabled>Lock the controls</button>
   </div>
   <div class="player-wrap">
    <iframe id="yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen="false" onload="checkIframeLoaded(this)"></iframe>
@@ -1083,7 +1085,8 @@ function prepareVideo(id){
   document.getElementById('lock-toast').classList.add('hidden');
   document.getElementById('next-videos').style.display='';
   document.querySelector('.next-title').style.display='';
-  document.getElementById('yt-iframe').src='https://www.youtube.com/embed/'+id+'?autoplay=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1';
+document.getElementById('yt-iframe').src='https://www.youtube.com/embed/'+id+'?autoplay=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&enablejsapi=1';
+document.getElementById('btn-lock').disabled=true;
   buildNextVideos(id);
   show('player-screen');
 }
@@ -1132,17 +1135,21 @@ function showPin(title,sub){pinBuffer='';updateDots();document.getElementById('p
 function pinPress(d){if(pinBuffer.length>=4)return;pinBuffer+=d;updateDots();if(pinBuffer.length===4)setTimeout(checkPin,120);}
 function pinClear(){pinBuffer=pinBuffer.slice(0,-1);updateDots();}
   
-  function pinCancel(){
+ function pinCancel(){
   document.getElementById('pin-overlay').style.display='none';
   pinBuffer='';
   pinAction=null;
   var player=document.getElementById('player-screen');
   if(player&&player.style.display==='flex'){
-    document.getElementById('yt-iframe').contentWindow.postMessage(
-      '{"event":"command","func":"playVideo","args":""}','*'
-    );
+    try{
+      document.getElementById('yt-iframe').contentWindow.postMessage(
+        JSON.stringify({event:'command',func:'playVideo',args:''}),
+        'https://www.youtube.com'
+      );
+    }catch(err){}
   }
 }
+
 
 function updateDots(){for(var i=0;i<4;i++)document.getElementById('d'+i).className='dot'+(i<pinBuffer.length?' filled':'');}
 function checkPin(){
@@ -1188,6 +1195,20 @@ window.addEventListener('popstate',function(){
   if(player&&player.style.display==='flex'){requestClose();}
 });
 
+  window.addEventListener('message',function(e){
+  if(e.origin!=='https://www.youtube.com')return;
+  try{
+    var data=JSON.parse(e.data);
+    if(data.event==='onStateChange'){
+      var btn=document.getElementById('btn-lock');
+      if(data.info===1){
+        // Playing — enable lock
+        if(btn)btn.disabled=false;
+      }
+    }
+  }catch(err){}
+});
+  
 loadVideos();
 
 if('serviceWorker' in navigator){
