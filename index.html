@@ -1199,12 +1199,33 @@ window.addEventListener('popstate',function(){
   if(player&&player.style.display==='flex'){requestClose();}
 });
 
-  
+ // Show install prompt only when running in browser, not standalone PWA
+if(window.matchMedia('(display-mode: browser)').matches){
+  var alreadyShown=sessionStorage.getItem('et_install_shown');
+  if(!alreadyShown){
+    sessionStorage.setItem('et_install_shown','1');
+    document.getElementById('install-popup').style.display='flex';
+  }
+}
+ 
 loadVideos();
 
 if('serviceWorker' in navigator){
   window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js');});
 }
 </script>
+  <div id="install-popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.87);z-index:300;align-items:flex-end;justify-content:center;">
+  <div style="background:var(--bg);border:1px solid var(--border);border-radius:20px 20px 0 0;padding:28px 24px 40px;width:100%;max-width:560px;">
+    <div style="font-size:17px;font-weight:700;margin-bottom:6px;">Add to your home screen</div>
+    <div style="font-size:13px;color:var(--text-2);line-height:1.65;margin-bottom:20px;">For the best experience — and to remove the browser back button — open EarlyTube as an app.<br/><br/>
+    <strong style="color:var(--text);">iPhone:</strong> tap Share (□↑) → <em>Add to Home Screen</em> → Add<br/>
+    <strong style="color:var(--text);">Android:</strong> tap Menu (⋮) → <em>Add to Home Screen</em> → Add<br/><br/>
+    <span style="font-size:12px;color:var(--text-3);">Always launch from the home screen icon, not the browser.</span>
+    </div>
+    <button onclick="document.getElementById('install-popup').style.display='none';" style="width:100%;padding:14px;border-radius:10px;background:var(--red);color:white;border:none;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;margin-bottom:10px;">Got it</button>
+    <button onclick="document.getElementById('install-popup').style.display='none';" style="width:100%;padding:14px;border-radius:10px;background:var(--card);color:var(--text-2);border:1px solid var(--border);font-size:15px;font-family:inherit;cursor:pointer;">Maybe later</button>
+  </div>
+</div>
+
 </body>
 </html>
