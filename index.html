@@ -325,7 +325,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sa
 <div id="player-screen" class="screen">
   <div class="player-top" id="player-top">
     <div class="player-instruction">Tap play on the video below, then tap Lock — controls disappear for your child.</div>
-    <button class="btn-lock" id="btn-lock" onclick="lockControls()" disabled>Lock the controls</button>
+    <button class="btn-lock" id="btn-lock" onclick="lockControls()">▶ Play and Lock</button>
   </div>
   <div class="player-wrap">
    <iframe id="yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen="false" onload="checkIframeLoaded(this)"></iframe>
@@ -1085,13 +1085,19 @@ function prepareVideo(id){
   document.getElementById('lock-toast').classList.add('hidden');
   document.getElementById('next-videos').style.display='';
   document.querySelector('.next-title').style.display='';
-  document.getElementById('yt-iframe').src='https://www.youtube.com/embed/'+id+'?autoplay=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&enablejsapi=1&origin='+encodeURIComponent(window.location.origin);
+document.getElementById('yt-iframe').src='https://www.youtube.com/embed/'+id+'?autoplay=0&controls=1&disablekb=0&fs=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1';
 document.getElementById('btn-lock').disabled=true;
   buildNextVideos(id);
   show('player-screen');
 }
 
   function lockControls(){
+  try{
+    document.getElementById('yt-iframe').contentWindow.postMessage(
+      JSON.stringify({event:'command',func:'playVideo',args:''}),
+      'https://www.youtube.com'
+    );
+  }catch(err){}
   document.getElementById('player-overlay').style.display='block';
   document.getElementById('player-top').style.display='none';
   document.getElementById('player-bottom').style.display='block';
