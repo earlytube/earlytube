@@ -1124,6 +1124,7 @@ function closeVideo(){
   show('home');
 }
 function showHome(){show('home');}
+function checkIframeLoaded(el){}
 function requestClose(){pinAction='close';showPin('Parent PIN required','Enter your PIN to close this video');}
 function requestSettings(){pinAction='settings';showPin('Parent PIN required','Enter your PIN to open Settings');}
 function showPin(title,sub){pinBuffer='';updateDots();document.getElementById('pin-error').textContent='';document.getElementById('pin-title').textContent=title;document.getElementById('pin-subtitle').textContent=sub;document.getElementById('pin-overlay').style.display='flex';}
