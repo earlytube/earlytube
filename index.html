@@ -806,6 +806,7 @@ function emailSignOut(){
   userEmail=null;
   localStorage.removeItem('et_email');
   updateAuthUI(null);
+  document.getElementById('welcome-error').textContent='';
  if(appConfig.signinEnabled){
   document.getElementById('welcome-modal').style.display='flex';
 }
@@ -858,6 +859,7 @@ function signOut(){
     localStorage.removeItem('et_tier');
     // Keep et_email so they don't get modal again on next load
     updateAuthUI(null);
+    document.getElementById('welcome-error').textContent='';
     var player=document.getElementById('player-screen');
     if(player&&player.style.display==='flex'){closeVideo();}
     // If signin is enabled and no email saved, show modal again
@@ -878,6 +880,8 @@ function updateAuthUI(user){
     document.getElementById('auth-name').textContent=user.displayName?user.displayName.split(' ')[0]:user.email;
     document.getElementById('pin-storage-note').textContent='You are signed in — your PIN is saved to your account and will never reset.';
     document.getElementById('info-card-text').innerHTML='<strong>For parents:</strong> Closing always requires the parent PIN. <strong>Default PIN is 1234.</strong> Long press logo to open Settings and change PIN. Forgot your PIN? <a href="#" onclick="forgotPin();return false;" style="color:var(--red);font-weight:600;">Reset to 1234</a>.';
+    document.getElementById('suggested-card').style.display='block';
+    document.getElementById('paste-card').style.display='block';
     updateBetaUI();
   } else {
     document.getElementById('auth-signed-in').style.display='none';
