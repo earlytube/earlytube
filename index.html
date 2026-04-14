@@ -991,15 +991,13 @@ function loadUserProfile(user){
       localStorage.setItem('et_tier',userTier);
       updateBetaUI();
       if(data.sheetId){
-        userSheetUrl=data.sheetUrl;
-        var token=localStorage.getItem('et_gtoken');
-        if(token){setupUserProfile(user,token);}
-        else{recoverWithFreshToken(user);}
-      } else if(userTier==='beta'){
-        recoverWithFreshToken(user);
-      } else {
-        showNoVideosState(null);
-      }
+  userSheetUrl=data.sheetUrl;
+  var token=localStorage.getItem('et_gtoken');
+  if(token){setupUserProfile(user,token);}
+  else{showNoVideosState(userSheetUrl);}
+} else {
+  showNoVideosState(null);
+}
     } else {
       showNoVideosState(null);
     }
