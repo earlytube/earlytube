@@ -234,6 +234,10 @@ Shown when signinEnabled:true and user not identified.                    */
         <span class="auth-name" id="auth-name"></span>
         <button class="btn-signout" onclick="signOut()">Sign out</button>
       </div>
+      <div class="auth-signed-in-header" id="auth-email-only" style="display:none;">
+   <span class="auth-name" id="auth-email-name"></span>
+  <button class="btn-signout" onclick="emailSignOut()">Sign out</button>
+</div>
     </div>
   </nav>
 
@@ -273,15 +277,8 @@ Shown when signinEnabled:true and user not identified.                    */
   <a class="sheet-link" id="sheet-link-2" href="#" target="_blank">&#128202; Manage in Google Sheets</a>
 </div>
 
-<div class="card" id="paste-card">
-  <div class="input-label">Paste a YouTube link</div>
-  <div class="input-desc">Find a video on YouTube, copy the link and paste it here. Your child watches it without any controls — no rewind, no skip, no loop.</div>
-  <div class="input-wrap">
-    <input id="url-input" type="url" inputmode="url" placeholder="youtube.com/watch?v=..."/>
-    <button class="btn-watch" onclick="handleWatch()">Watch</button>
-  </div>
-  <div class="error-msg" id="url-error"></div>
-</div>
+
+
 
 <div class="card" id="suggested-card">
   <div class="tab-bar">
@@ -771,6 +768,14 @@ function submitBetaWaitlist(){
     setTimeout(function(){closeBetaModal();},2000);
   }).catch(function(){closeBetaModal();});
 }
+function emailSignOut(){
+  userEmail=null;
+  localStorage.removeItem('et_email');
+  updateAuthUI(null);
+  if(appConfig.signinEnabled){
+    document.getElementById('welcome-modal').style.display='flex';
+  }
+}
 
 /* ── INACTIVITY AUTO SIGN-OFF (15 minutes) ─────────────────────────────── */
 var INACTIVITY_MS=15*60*1000;
@@ -841,6 +846,14 @@ function updateAuthUI(user){
     updateBetaUI();
   } else {
     document.getElementById('auth-signed-in').style.display='none';
+    var emailOnlyEl=document.getElementById('auth-email-only');
+    var emailNameEl=document.getElementById('auth-email-name');
+    if(userEmail&&emailOnlyEl){
+      emailOnlyEl.style.display='flex';
+      if(emailNameEl)emailNameEl.textContent=userEmail.split('@')[0];
+    } else {
+      if(emailOnlyEl)emailOnlyEl.style.display='none';
+    }
     document.getElementById('personal-card').style.display='none';
     document.getElementById('no-videos-card').style.display='none';
     document.getElementById('suggested-card').style.display='block';
@@ -850,6 +863,7 @@ function updateAuthUI(user){
     updateBetaUI();
   }
 }
+
 
 /* ── AUTH STATE CHANGE ───────────────────────────────────────────────────────
    On first sign-in: check for pending invite code from welcome modal.
