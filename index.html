@@ -279,7 +279,15 @@ Hidden by default. Never shown to anonymous/email-only users.             */
   <a class="sheet-link" id="sheet-link-2" href="#" target="_blank">&#128202; Manage in Google Sheets</a>
 </div>
 
-
+<div class="card" id="paste-card">
+  <div class="input-label">Paste a YouTube link</div>
+  <div class="input-desc">Find a video on YouTube, copy the link and paste it here. Your child watches it without any controls — no rewind, no skip, no loop.</div>
+  <div class="input-wrap">
+    <input id="url-input" type="url" inputmode="url" placeholder="youtube.com/watch?v=..."/>
+    <button class="btn-watch" onclick="handleWatch()">Watch</button>
+  </div>
+  <div class="error-msg" id="url-error"></div>
+</div>
 
 
 <div class="card" id="suggested-card">
