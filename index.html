@@ -667,6 +667,8 @@ function welcomeContinueWithEmail(){
     source:'welcome-modal'
   }).catch(function(){});
   document.getElementById('welcome-modal').style.display='none';
+  document.getElementById('suggested-card').style.display='block';
+  document.getElementById('paste-card').style.display='block';
   updateAuthUI(null);
 }
 
@@ -774,9 +776,9 @@ function emailSignOut(){
   userEmail=null;
   localStorage.removeItem('et_email');
   updateAuthUI(null);
-  if(appConfig.signinEnabled){
-    document.getElementById('welcome-modal').style.display='flex';
-  }
+ if(appConfig.signinEnabled){
+  document.getElementById('welcome-modal').style.display='flex';
+}
 }
 
 /* ── INACTIVITY AUTO SIGN-OFF (15 minutes) ─────────────────────────────── */
