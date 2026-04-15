@@ -713,6 +713,8 @@ function showBetaCodeModal(){
   document.getElementById('beta-confirmed-section').style.display='none';
   document.getElementById('beta-waitlist-confirmed-section').style.display='none';
   document.getElementById('beta-code-input').value='';
+  var knownEmail=currentUser?currentUser.email:localStorage.getItem('et_email');
+if(knownEmail)document.getElementById('beta-waitlist-email').value=knownEmail;
   var btn=document.getElementById('beta-submit-btn');
   btn.textContent='Unlock';btn.disabled=false;
   document.getElementById('beta-modal').style.display='flex';
