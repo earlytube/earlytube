@@ -204,9 +204,9 @@ Hidden by default. Never shown to anonymous/email-only users.             */
 .btn-back{width:100%;padding:14px;border-radius:10px;background:var(--card);color:var(--text);border:1px solid var(--border);font-size:15px;font-family:inherit;cursor:pointer;}
 .player-back-bar{background:var(--player-bg);padding:8px 20px;width:100%;}
 .player-back-bar button{width:100%;padding:12px;border-radius:8px;background:none;border:1px solid #444;color:#888;font-size:13px;font-family:inherit;cursor:pointer;}
-.tab-bar{display:flex;border-bottom:1px solid var(--border);margin-bottom:16px;}
-.tab-btn{flex:1;padding:9px 12px;background:none;border:none;border-bottom:2px solid transparent;font-size:13px;font-weight:600;color:var(--text-3);font-family:inherit;cursor:pointer;transition:color 0.15s,border-color 0.15s;margin-bottom:-1px;}
-.tab-btn.active{color:var(--red);border-bottom-color:var(--red);}
+.tab-bar{display:flex;flex:1;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.tab-btn{flex:1;padding:6px 16px;background:none;border:none;border-bottom:2px solid transparent;font-size:13px;font-weight:600;color:var(--text-3);font-family:inherit;cursor:pointer;text-align:center;}
+.tab-btn.active{color:var(--red);background:var(--red-light);border-bottom:2px solid var(--red);}
 .tab-btn:hover:not(.active){color:var(--text-2);}
 .edu-controls{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
 .edu-select{padding:6px 10px;border-radius:8px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);font-size:13px;font-family:inherit;outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%2394A3B8' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:24px;}
@@ -288,15 +288,15 @@ Hidden by default. Never shown to anonymous/email-only users.             */
 
 
 <div class="card" id="suggested-card">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-    <div class="card-header" style="margin-bottom:0;">Discover & Learn</div>
-    <div style="display:flex;gap:4px;">
-      <button class="tab-btn" id="tab-btn-educational" onclick="switchTab('educational')">Educational</button>
-      <button class="tab-btn active" id="tab-btn-leisure" onclick="switchTab('leisure')">Leisure</button>
-    </div>
+ <div style="display:flex;align-items:center;gap:16px;margin-bottom:10px;">
+  <div class="card-header" style="margin-bottom:0;white-space:nowrap;">Discover & Learn</div>
+  <div class="tab-bar">
+    <button class="tab-btn" id="tab-btn-educational" onclick="switchTab('educational')">Educational</button>
+    <button class="tab-btn active" id="tab-btn-leisure" onclick="switchTab('leisure')">Leisure</button>
   </div>
-  <div style="border-bottom:1px solid var(--border);margin-bottom:16px;"></div>
-  <div id="tab-leisure">
+</div>
+<div style="border-bottom:1px solid var(--border);margin-bottom:16px;"></div>
+ <div id="tab-leisure">
     <div class="section-header" style="justify-content:flex-end;">
       <select class="age-select" id="age-select" onchange="renderVideos()">
         <option value="teenplus">Teen+ (16+)</option>
