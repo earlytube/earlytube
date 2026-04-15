@@ -49,14 +49,12 @@ body{background:var(--bg);color:var(--text);font-family:‘Inter’,-apple-syste
 .badge{display:flex;align-items:center;gap:5px;background:var(--badge-bg);border:1px solid var(--border);border-radius:20px;padding:4px 10px;font-size:11px;color:var(--text-2);font-weight:500;}
 .badge-dot{width:6px;height:6px;border-radius:50%;background:#22C55E;flex-shrink:0;}
 .nav-right{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0;}
-.story-link{color:var(--red);text-decoration:none;font-size:12px;font-weight:600;white-space:nowrap;}
-.contact-link{font-size:11px;color:var(--text-3);text-decoration:none;display:none;}
 @media(min-width:480px){.contact-link{display:block;}}
 .auth-signed-in-header{display:none;align-items:center;gap:6px;}
 .auth-avatar{width:24px;height:24px;border-radius:50%;background:var(--red-light);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--red);overflow:hidden;flex-shrink:0;}
 .auth-avatar img{width:100%;height:100%;object-fit:cover;}
-.auth-name{font-size:11px;font-weight:500;color:var(--text);max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.btn-signout{font-size:11px;color:var(--text-3);background:none;border:none;cursor:pointer;font-family:inherit;text-decoration:underline;padding:0;}
+.auth-name{font-size:13px;font-weight:500;color:var(--text);max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.btn-signout{font-size:12px;color:var(--text-3);background:none;border:none;cursor:pointer;font-family:inherit;text-decoration:underline;padding:0;}
 
 /* ── BETA FEATURE STRIP ──────────────────────────────────────────────────────
 Shown below nav when betaFeaturesEnabled:true + signed in + tier != beta.
@@ -227,8 +225,6 @@ Hidden by default. Never shown to anonymous/email-only users.             */
       </div>
     </div>
        <div class="nav-right">
-      <a class="story-link" href="about.html" target="_blank">Our story</a>
-      <a class="contact-link" href="contact.html" target="_blank">Contact</a>
       <div class="auth-signed-in-header" id="auth-signed-in">
         <div class="auth-avatar" id="auth-avatar"></div>
         <span class="auth-name" id="auth-name"></span>
