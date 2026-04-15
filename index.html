@@ -590,12 +590,13 @@ if(auth.isSignInWithEmailLink(window.location.href)){
     emailForSignIn=window.prompt('Please confirm your email address');
   }
   if(emailForSignIn){
-    auth.signInWithEmailLink(emailForSignIn, window.location.href)
-      .then(function(){
-        localStorage.removeItem('et_email_for_signin');
-        // Clean URL
-        window.history.replaceState(null,'',window.location.pathname);
-      })
+   auth.signInWithEmailLink(emailForSignIn, window.location.href)
+  .then(function(result){
+    localStorage.setItem('et_email', result.user.email);
+    localStorage.removeItem('et_email_for_signin');
+    // Clean URL
+    window.history.replaceState(null,'',window.location.pathname);
+  })
       .catch(function(e){
         console.error('Email link sign-in failed:',e);
       });
