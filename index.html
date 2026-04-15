@@ -555,7 +555,8 @@ var currentUser=null,userSheetUrl=null,personalVideosData={};
 /* ── PROVIDERS ───────────────────────────────────────────────────────────────
    provider     → basic Google Auth only — used at sign-in
    driveProvider → Drive + Sheets scopes — used only for beta Add Videos     */
-var provider=new firebase.auth.GoogleAuthProvider();
+ var provider=new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({prompt:'select_account'});
 var driveProvider=new firebase.auth.GoogleAuthProvider();
 driveProvider.addScope('https://www.googleapis.com/auth/drive.file');
 driveProvider.addScope('https://www.googleapis.com/auth/spreadsheets');
