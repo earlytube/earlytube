@@ -69,6 +69,7 @@ Hidden by default. Never shown to anonymous/email-only users.             */
 .app-content{display:flex;flex-direction:column;gap:12px;padding:12px;width:100%;}
 @media(min-width:640px){.app-content{padding:16px;gap:14px;}}
 @media(min-width:1024px){.app-content{padding:20px 28px;gap:16px;}}
+.card-header{font-size:18px;font-weight:700;letter-spacing:-0.3px;color:var(--text);margin-bottom:16px;}
 
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;width:100%;}
 .input-label{font-size:12px;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;}
@@ -262,7 +263,7 @@ Hidden by default. Never shown to anonymous/email-only users.             */
 <div class="card" id="personal-card" style="display:none;">
   <div class="section-header">
     <div class="section-left">
-      <div class="section-title">My videos</div>
+      <div class="card-header">My Video Collections</div>
     </div>
     <div style="display:flex;align-items:center;gap:8px;">
       <select class="age-select" id="category-select" onchange="renderPersonalCategory()"></select>
@@ -276,7 +277,7 @@ Hidden by default. Never shown to anonymous/email-only users.             */
 <div class="card" id="no-videos-card" style="display:none;">
   <div class="section-header">
     <div class="section-left">
-      <div class="section-title">My videos</div>
+     <div class="card-header">My Video Collections</div>
     </div>
     <button class="btn-add-video" onclick="showAddVideoModal()">+ Add video</button>
   </div>
@@ -285,7 +286,7 @@ Hidden by default. Never shown to anonymous/email-only users.             */
 </div>
 
 <div class="card" id="paste-card">
-  <div class="input-label">Paste a YouTube link</div>
+<div class="card-header">Paste a Link</div>
   <div class="input-desc">Find a video on YouTube, copy the link and paste it here. Your child watches it without any controls — no rewind, no skip, no loop.</div>
   <div class="input-wrap">
     <input id="url-input" type="url" inputmode="url" placeholder="youtube.com/watch?v=..."/>
@@ -296,10 +297,11 @@ Hidden by default. Never shown to anonymous/email-only users.             */
 
 
 <div class="card" id="suggested-card">
-  <div class="tab-bar">
+  <div class="card-header">Discover & Learn</div>
+<div class="tab-bar">
     <button class="tab-btn active" id="tab-btn-leisure" onclick="switchTab('leisure')">Leisure</button>
     <button class="tab-btn" id="tab-btn-educational" onclick="switchTab('educational')">Educational</button>
-  </div>
+</div>
   <div id="tab-leisure">
     <div class="section-header">
       <div class="section-left">
