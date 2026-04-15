@@ -1396,7 +1396,6 @@ function switchTab(tab){
   document.getElementById('tab-btn-leisure').className='tab-btn'+(tab==='leisure'?' active':'');
   document.getElementById('tab-btn-educational').className='tab-btn'+(tab==='educational'?' active':'');
   if(tab==='educational')loadCurriculumVideos();
-  switchTab('educational');
 }
 
 function renderVideos(){
@@ -1571,6 +1570,7 @@ function trackCurriculumSelected(grade,subject){etSession.gradeSelected=grade;et
 /* ── BOOT ───────────────────────────────────────────────────────────────── */
 loadAppConfig();
 loadVideos();
+switchTab('educational'); 
 
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js');});}
 
