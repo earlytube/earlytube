@@ -263,9 +263,11 @@ Hidden by default. Never shown to anonymous/email-only users.             */
   <div class="section-header">
     <div class="section-left">
       <div class="section-title">My videos</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <select class="age-select" id="category-select" onchange="renderPersonalCategory()"></select>
       <button class="btn-add-video" onclick="showAddVideoModal()">+ Add</button>
     </div>
-    <select class="age-select" id="category-select" onchange="renderPersonalCategory()"></select>
   </div>
   <div class="video-list" id="personal-video-list"></div>
   <a class="sheet-link" id="sheet-link" href="#" target="_blank">&#128202; Manage in Google Sheets</a>
@@ -273,7 +275,9 @@ Hidden by default. Never shown to anonymous/email-only users.             */
 
 <div class="card" id="no-videos-card" style="display:none;">
   <div class="section-header">
-    <div class="section-title">My videos</div>
+    <div class="section-left">
+      <div class="section-title">My videos</div>
+    </div>
     <button class="btn-add-video" onclick="showAddVideoModal()">+ Add video</button>
   </div>
   <div class="empty-state">No videos yet — tap + Add to build your list.</div>
@@ -316,9 +320,9 @@ Hidden by default. Never shown to anonymous/email-only users.             */
     </div>
   </div>
   <div id="tab-educational" style="display:none;">
-    <div class="edu-controls">
-      <select class="edu-select" id="grade-select" onchange="updateSubjectOptions();renderEducationalVideos();">
-        <option value="9">Grade 9</option>
+  <div class="edu-controls" style="justify-content:flex-end;">
+  <select class="edu-select" id="grade-select" onchange="updateSubjectOptions();renderEducationalVideos();">
+      <option value="9">Grade 9</option>
         <option value="10">Grade 10</option>
         <option value="11">Grade 11</option>
         <option value="12">Grade 12</option>
