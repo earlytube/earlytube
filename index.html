@@ -295,9 +295,6 @@ Hidden by default. Never shown to anonymous/email-only users.             */
 </div>
   <div id="tab-leisure">
     <div class="section-header">
-      <div class="section-left">
-        <div class="live-dot" id="live-dot" style="display:none"></div>
-      </div>
       <select class="age-select" id="age-select" onchange="renderVideos()">
         <option value="teenplus">Teen+ (16+)</option>
         <option value="teen">Teen (12-16)</option>
@@ -1343,7 +1340,6 @@ function loadVideos(){
   fetch(CSV_URL).then(function(r){return r.text();}).then(function(csv){
     var rows=parseCSV(csv);
     allVideos=rows.filter(function(r){var s=(r.status||'').toLowerCase();return s===''||s==='approved';});
-    document.getElementById('live-dot').style.display=allVideos.length?'block':'none';
     renderVideos();
   }).catch(function(){renderVideos();});
 }
