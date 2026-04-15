@@ -642,8 +642,6 @@ function onConfigLoaded(){
   }
 
 // Hide install popup — welcome modal takes priority
-  document.getElementById('install-popup').style.display='none';
-  // Show welcome modal
   document.getElementById('welcome-modal').style.display='flex';
 }
 
@@ -863,8 +861,6 @@ function signOut(){
 
 /* ── AUTH STATE UI ──────────────────────────────────────────────────────── */
 function updateAuthUI(user){
-  var isStandalone=window.navigator.standalone===true||window.matchMedia('(display-mode: standalone)').matches;
-    if(!isStandalone){document.getElementById('install-popup').style.display='flex';}
   if(user){    
     document.getElementById('auth-signed-in').style.display='flex';
     document.getElementById('auth-email-only').style.display='none';
@@ -907,6 +903,7 @@ auth.onAuthStateChanged(function(user){
     // Close welcome modal if open
     document.getElementById('welcome-modal').style.display='none';
     updateAuthUI(user);
+    showInstallPopupIfNeeded(); // ← add this
     startInactivityWatch();
 
     auth.getRedirectResult().then(function(result){
@@ -1516,6 +1513,13 @@ loadAppConfig();
 loadVideos();
 
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js');});}
+
+
+  function showInstallPopupIfNeeded(){
+  var isStandalone=window.navigator.standalone===true||window.matchMedia('(display-mode: standalone)').matches;
+  if(!isStandalone){document.getElementById('install-popup').style.display='flex';}
+}
+
 </script>
 
 <div id="install-popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.87);z-index:300;align-items:center;justify-content:center;padding:20px;">
