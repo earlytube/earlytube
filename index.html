@@ -1122,7 +1122,6 @@ function showNoVideosState(sheetUrl){
   }
   updateBetaUI();
 }
-
 function createFreshSetup(token,user){
   var name=user.displayName||'My';
   return fetch(
@@ -1141,26 +1140,55 @@ function createFreshSetup(token,user){
     }).then(function(r){if(r.status===403)throw{code:'SCOPE_DENIED'};return r.json();})
     .then(function(f){return f.id;});
   }).then(function(folderId){
-    return fetch('https://sheets.googleapis.com/v4/spreadsheets',{
-      method:'POST',
-      headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},
-      body:JSON.stringify({
-        properties:{title:'EarlyTube — '+name},
-        sheets:[{properties:{title:'Videos'},data:[{rowData:[{values:[
-          {userEnteredValue:{stringValue:'title'}},
-          {userEnteredValue:{stringValue:'channel'}},
-          {userEnteredValue:{stringValue:'id'}},
-          {userEnteredValue:{stringValue:'category'}},
-          {userEnteredValue:{stringValue:'age'}},
-          {userEnteredValue:{stringValue:'notes'}}
-        ]}]}]}]
-      })
-    }).then(function(r){if(r.status===403)throw{code:'SCOPE_DENIED'};return r.json();})
-    .then(function(sheet){
-      return fetch(
-        'https://www.googleapis.com/drive/v3/files/'+sheet.spreadsheetId+'?addParents='+folderId+'&removeParents=root',
-        {method:'PATCH',headers:{'Authorization':'Bearer '+token}}
-      ).then(function(){return{id:sheet.spreadsheetId};});
+    // ── CHECK FOR EXISTING MY VIDEOS SHEET ──────────────────────────────
+    return fetch(
+      'https://www.googleapis.com/drive/v3/files?q=properties+has+%7B+key%3D%27earlytube%27+and+value%3D%27my-videos%27+%7D+and+%27'+folderId+'%27+in+parents+and+trashed%3Dfalse',
+      {headers:{'Authorization':'Bearer '+token}}
+    ).then(function(r){return r.json();})
+    .then(function(data){
+      if(data.files&&data.files.length>0){
+        // Existing sheet found — reuse it
+        var existingId=data.files[0].id;
+        var existingUrl='https://docs.google.com/spreadsheets/d/'+existingId+'/edit';
+        // Update Firestore with correct sheetId
+        return db.collection('users').doc(user.uid).set({
+          sheetId:existingId,
+          sheetUrl:existingUrl
+        },{merge:true}).then(function(){
+          return{id:existingId};
+        });
+      }
+      // ── NO EXISTING SHEET — CREATE NEW ──────────────────────────────
+      return fetch('https://sheets.googleapis.com/v4/spreadsheets',{
+        method:'POST',
+        headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},
+        body:JSON.stringify({
+          properties:{title:'EarlyTube — '+name},
+          sheets:[{properties:{title:'Videos'},data:[{rowData:[{values:[
+            {userEnteredValue:{stringValue:'title'}},
+            {userEnteredValue:{stringValue:'channel'}},
+            {userEnteredValue:{stringValue:'id'}},
+            {userEnteredValue:{stringValue:'category'}},
+            {userEnteredValue:{stringValue:'age'}},
+            {userEnteredValue:{stringValue:'notes'}}
+          ]}]}]}]
+        })
+      }).then(function(r){if(r.status===403)throw{code:'SCOPE_DENIED'};return r.json();})
+      .then(function(sheet){
+        // Tag the new sheet with earlytube:my-videos property
+        return fetch(
+          'https://www.googleapis.com/drive/v3/files/'+sheet.spreadsheetId,{
+          method:'PATCH',
+          headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},
+          body:JSON.stringify({properties:{earlytube:'my-videos'}})
+        }).then(function(){
+          // Move sheet into EarlyTube folder
+          return fetch(
+            'https://www.googleapis.com/drive/v3/files/'+sheet.spreadsheetId+'?addParents='+folderId+'&removeParents=root',
+            {method:'PATCH',headers:{'Authorization':'Bearer '+token}}
+          );
+        }).then(function(){return{id:sheet.spreadsheetId};});
+      });
     });
   });
 }
