@@ -38,8 +38,8 @@ body{background:var(--bg);color:var(--text);font-family:‘Inter’,-apple-syste
 .screen{display:none;flex-direction:column;min-height:100vh;}
 #home{display:flex;}
 
-.app-nav{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;padding:10px 14px;width:100%;}
-.nav-brand{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;flex-shrink:0;}
+.app-nav{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;padding:14px 20px;width:100%;}
+  .nav-brand{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;flex-shrink:0;}
 .nav-brand img{width:36px;height:36px;border-radius:9px;flex-shrink:0;}
 .brand-name{font-size:17px;font-weight:700;letter-spacing:-0.3px;}
 .brand-tag{font-size:11px;color:var(--text-2);}
@@ -48,7 +48,7 @@ body{background:var(--bg);color:var(--text);font-family:‘Inter’,-apple-syste
 @media(min-width:640px){.nav-badges{display:flex;}}
 .badge{display:flex;align-items:center;gap:5px;background:var(--badge-bg);border:1px solid var(--border);border-radius:20px;padding:4px 10px;font-size:11px;color:var(--text-2);font-weight:500;}
 .badge-dot{width:6px;height:6px;border-radius:50%;background:#22C55E;flex-shrink:0;}
-.nav-right{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0;}
+  .nav-right{display:flex;flex-direction:row;align-items:center;gap:8px;margin-left:auto;flex-shrink:0;}
 @media(min-width:480px){.contact-link{display:block;}}
 .auth-signed-in-header{display:none;align-items:center;gap:6px;}
 .auth-avatar{width:24px;height:24px;border-radius:50%;background:var(--red-light);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--red);overflow:hidden;flex-shrink:0;}
