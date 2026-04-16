@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EarlyTube — Back soon</title>
+<link rel="icon" type="image/png" href="icon.png"/>
+<link rel="apple-touch-icon" href="icon.png"/>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+–bg: #0F172A;
+–card: #1E293B;
+–border: #334155;
+–text: #F8FAFC;
+–text-2: #94A3B8;
+–green: #10B981;
+–green-dim: #022C22;
+}
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: ‘Inter’, -apple-system, sans-serif;
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 24px;
+overflow: hidden;
+}
+
+/* Subtle animated background */
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(16,185,129,0.06) 0%, transparent 70%);
+pointer-events: none;
+}
+
+.wrap {
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+max-width: 380px;
+width: 100%;
+animation: fadeUp 0.7s ease both;
+}
+
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(20px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+.logo-wrap {
+position: relative;
+margin-bottom: 28px;
+animation: fadeUp 0.7s 0.1s ease both;
+}
+
+.logo {
+width: 72px;
+height: 72px;
+border-radius: 18px;
+display: block;
+box-shadow: 0 8px 32px rgba(16,185,129,0.2), 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.pulse-ring {
+position: absolute;
+inset: -6px;
+border-radius: 24px;
+border: 1.5px solid rgba(16,185,129,0.25);
+animation: ring 3s ease-in-out infinite;
+}
+
+@keyframes ring {
+0%, 100% { opacity: 0.3; transform: scale(1); }
+50% { opacity: 0.8; transform: scale(1.04); }
+}
+
+.app-name {
+font-size: 22px;
+font-weight: 700;
+letter-spacing: -0.4px;
+margin-bottom: 28px;
+animation: fadeUp 0.7s 0.15s ease both;
+}
+
+.message-card {
+background: var(–card);
+border: 1px solid var(–border);
+border-left: 3px solid var(–green);
+border-radius: 0 16px 16px 0;
+padding: 24px 28px;
+width: 100%;
+margin-bottom: 28px;
+animation: fadeUp 0.7s 0.2s ease both;
+}
+
+.eyebrow {
+font-size: 10px;
+font-weight: 700;
+color: var(–text-2);
+text-transform: uppercase;
+letter-spacing: 1px;
+margin-bottom: 14px;
+}
+
+.main-message {
+font-family: ‘Lora’, serif;
+font-size: 18px;
+line-height: 1.7;
+color: var(–text);
+margin-bottom: 6px;
+}
+
+.sub-message {
+font-family: ‘Lora’, serif;
+font-size: 15px;
+color: var(–text-2);
+line-height: 1.6;
+margin-bottom: 16px;
+}
+
+.sign {
+font-family: ‘Lora’, serif;
+font-size: 13px;
+color: var(–text-2);
+font-style: italic;
+text-align: right;
+display: block;
+}
+
+.footer {
+font-size: 12px;
+color: var(–text-2);
+animation: fadeUp 0.7s 0.3s ease both;
+}
+
+.footer a {
+color: var(–green);
+text-decoration: none;
+font-weight: 500;
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+  <div class="logo-wrap">
+    <div class="pulse-ring"></div>
+    <img class="logo" src="icon.png" alt="EarlyTube"
+         onerror="this.style.background='#10B981';this.style.borderRadius='18px'"/>
+  </div>
+
+  <div class="app-name">EarlyTube</div>
+
+  <div class="message-card">
+    <div class="eyebrow">A note from Gee</div>
+    <div class="main-message">Taking a quick break to fix a few things.</div>
+    <div class="sub-message">Back before you know it.</div>
+    <span class="sign">— Gee</span>
+  </div>
+
+  <div class="footer">
+    Questions? <a href="mailto:earlytubeapp@gmail.com">earlytubeapp@gmail.com</a>
+  </div>
+
+</div>
+</body>
+</html>
