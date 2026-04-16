@@ -1486,15 +1486,7 @@ function closeVideo(){document.getElementById('yt-iframe').src='';document.getEl
 function showHome(){show('home');}
 function checkIframeLoaded(el){}
 function requestClose(){pinAction='close';showPin('Parent PIN required','Enter your PIN to close this video');}
-  function requestSettings(){
-  var tier=localStorage.getItem('et_tier')||'general';
-  if(tier==='gamma'){
-    window.location.href='parent.html';
-  } else {
-    pinAction='settings';
-    showPin('Parent PIN required','Enter your PIN to open Settings');
-  }
-}
+function requestSettings(){pinAction='settings';showPin('Parent PIN required','Enter your PIN to open Settings');}
 function showPin(title,sub){pinBuffer='';updateDots();document.getElementById('pin-error').textContent='';document.getElementById('pin-title').textContent=title;document.getElementById('pin-subtitle').textContent=sub;document.getElementById('pin-overlay').style.display='flex';}
 function pinPress(d){if(pinBuffer.length>=4)return;pinBuffer+=d;updateDots();if(pinBuffer.length===4)setTimeout(checkPin,120);}
 function pinClear(){pinBuffer=pinBuffer.slice(0,-1);updateDots();}
