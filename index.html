@@ -618,28 +618,16 @@ function loadAppConfig(){
    Called after config is read. Decides whether to show welcome modal.
    If user is already identified (Google auth or email saved), skip modal.  */
 function onConfigLoaded(){
-  // If signin is disabled — show app directly, nothing to do
-  if(!appConfig.signinEnabled){
-    updateAuthUI(currentUser);
-    return;
-  }
+  if(!appConfig.signinEnabled){updateAuthUI(currentUser);showInstallPopupIfNeeded();return;}
+  if(currentUser){updateAuthUI(currentUser);showInstallPopupIfNeeded();return;}
+  if(userEmail){updateAuthUI(null);showInstallPopupIfNeeded();return;}
 
-  // If already signed in with Google — skip modal
-  if(currentUser){
-    updateAuthUI(currentUser);
-    return;
-  }
-
-  // If email-only user already identified — skip modal
-  if(userEmail){
-    updateAuthUI(null);
-    return;
-  }
-
-// Hide install popup — welcome modal takes priority
-  document.getElementById('welcome-modal').style.display='flex';
+  // Wait for Firebase to confirm no active session before showing modal
+  auth.onAuthStateChanged(function(user){
+    if(user)return;
+    document.getElementById('welcome-modal').style.display='flex';
+  },{onlyOnce:true});
 }
-
 /* ── WELCOME MODAL ACTIONS ───────────────────────────────────────────────── */
 
 // Validates email field, then triggers Google auth
