@@ -1206,18 +1206,18 @@ function createFreshSetup(token,user){
 var hasVideos=false,needsTitleFetch=[];
 var freshData={};
 
-      for(var i=1;i<rows.length;i++){
-        var row=rows[i];
-        if(!row||!row[2]||!row[2].trim())continue;
-        var id=extractId(row[2].trim())||row[2].trim();
-        if(!id)continue;
-        var title=row[0]||'',cat=row[3]||'My Videos';
-        if(!personalVideosData[cat])personalVideosData[cat]=[];
-        personalVideosData[cat].push({title:title,id:id});
-        hasVideos=true;
-        if(!title)needsTitleFetch.push({sheetRow:i+1,id:id,cat:cat});
-      }
-      if(!hasVideos){showNoVideosState(userSheetUrl);return;}
+    for(var i=1;i<rows.length;i++){
+  var row=rows[i];
+  if(!row||!row[2]||!row[2].trim())continue;
+  var id=extractId(row[2].trim())||row[2].trim();
+  if(!id)continue;
+  var title=row[0]||'',cat=row[3]||'My Videos';
+  if(!freshData[cat])freshData[cat]=[];
+  freshData[cat].push({title:title,id:id});
+  hasVideos=true;
+  if(!title)needsTitleFetch.push({sheetRow:i+1,id:id,cat:cat});
+}
+if(!hasVideos){showNoVideosState(userSheetUrl);return;}
 personalVideosData=freshData;
       document.getElementById('no-videos-card').style.display='none';
       document.getElementById('personal-card').style.display='block';
