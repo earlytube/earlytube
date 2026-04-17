@@ -1203,8 +1203,9 @@ function createFreshSetup(token,user){
         showNoVideosState(userSheetUrl);return;
       }
       var rows=data.values||[];
-      var hasVideos=false,needsTitleFetch=[];
-      personalVideosData={};
+var hasVideos=false,needsTitleFetch=[];
+var freshData={};
+
       for(var i=1;i<rows.length;i++){
         var row=rows[i];
         if(!row||!row[2]||!row[2].trim())continue;
@@ -1217,6 +1218,7 @@ function createFreshSetup(token,user){
         if(!title)needsTitleFetch.push({sheetRow:i+1,id:id,cat:cat});
       }
       if(!hasVideos){showNoVideosState(userSheetUrl);return;}
+personalVideosData=freshData;
       document.getElementById('no-videos-card').style.display='none';
       document.getElementById('personal-card').style.display='block';
       document.getElementById('sheet-link').href=userSheetUrl||'#';
